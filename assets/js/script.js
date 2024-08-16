@@ -126,7 +126,7 @@ Promise.all(fileCaricati)
 					});
 
 					// Scambio degli elementi
-					if (n1.io !== eid && n2.io === eid && a.t2) {
+					if (n1.io != eid && n2.io == eid && a.t2) {
 						[trCom[0], trCom[1]] = [trCom[1], trCom[0]];
 					}
 				}
