@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+	{% include head.html %}
+</head>
+<body>
+	<div class="wrapper">
+	{% if page.use_js %}<div class="spinner-container" id="spinner"><div class="spinner"></div></div>{% endif %}
+	<div id="pagina">
+		{% include header.html %}
+		<main>
+			<div class="side">
+				<h4><a href="{{site.baseurl}}" target="_self">{{site.title}}</a></h4>
+				<p>Una raccolta di informazioni sulla storia del territorio italiano dal 1861.</p>
+			</div>
+			<article>
+{{ content }}
+			</article>
+		</main>
+		{% include footer.html %}
+	</div>
+	</div>
+{% if page.use_js %}<script>
+	let baseUrl = '{{site.baseurl}}';
+</script>{% include scripts.html %}{% endif %}
+</body>
+</html>

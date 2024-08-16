@@ -1,0 +1,65 @@
+@font-face { font-family:'test'; font-weight: 200 700; src:url("/Pass-A38/font/Pass_A38.woff2") format("woff2-variations"); }
+html, body { height: 100% }
+body { font-family:'test', sans-serif; font-size:16pt; margin:0; padding:0; background: #fff }
+div { margin:0; padding:0; }
+
+input { font-family:'test', sans-serif; font-size:16pt; margin:0; padding:0; background: #fff; border: 0; border-bottom: 1px solid #888 }
+input:focus { outline: none }
+
+a { color: #06c }
+
+header { width: 100%; margin:0; padding:0 }
+header a { color: #fff }
+header a.b { color: #fff; text-decoration: none }
+header > div { width:100%; color: #fff }
+header > div.info { background: #048; }
+header > div.titolo { background: #06c; }
+header > div > div { width: 1180px; margin: 0px auto; padding:0 }
+header div div p { margin:0; padding:10px; font-size: 12pt }
+header div div h1 { margin:0; padding:20px 10px; font-size: 40px; font-weight: 350; color: #fff }
+
+main { width: 1180px; margin:60px auto 60px; padding:0 }
+
+div.side { width: 249px; margin: 30px 0 0; padding:10px 10px 5px; float:left; border-right:1px solid #888; color: #666; }
+div.side p { font-size: 14pt }
+div.side h4 { font-size: 16pt; font-weight: 600; margin: 0 }
+
+article { width: 890px; margin: 0 0 0 290px; padding:0 }
+article p { margin: 5px 10px; padding:0; color: #332925 }
+
+footer { padding:0; margin:0; width: 100%; background: #666; color: #fff }
+footer > div { padding: 40px 0; margin:0 auto; width: 1180px }
+footer p { margin: 0 10px; font-size: 18px }
+footer a { color: #fff; font-weight: 450; }
+
+h2 { margin:30px 10px;padding:0; font-size: 32px; font-weight: 400; color: #048 }
+
+.tabs { display: flex; cursor: pointer; border-bottom: 2px solid #06c; }
+.tabs div { padding: 10px 20px; margin-right: 10px; background-color: #f0f0f0; border: 1px solid #ddd; border-bottom: none; }
+.tabs div.active { background-color: #06c; color: #fff; }
+
+.tab-content { padding: 20px; border: 1px solid #ddd; border-top: none; }
+.tab-content > div { display: none; }
+.tab-content > div.active { display: block; }
+
+.sugg { border: 1px solid #ddd; max-height: 220px; overflow-y: auto; margin-top: 5px; background: #fff; position: absolute; width: 300px; max-width: calc(100% - 22px); z-index: 1000; display: none; }
+.sugg div { padding: 10px; cursor: pointer; line-height: 1em; }
+.sugg div:hover, .sugg div.active, .sugg div:hover span, .sugg div.active span { background: #06c; color: #fff; }
+.sugg span { font-size: 80%; color: #999 }
+
+.risp { margin-top: 20px; font-weight: 400; }
+.risp .d { font-weight: 700; }
+.risp .e { margin-left: 50px; font-size: 13pt }
+.risp .p { margin-left: 30px; font-size: 13pt }
+.risp .se { color: #800; font-weight: bold }
+
+.spinner-container { display: none }
+.wrapper { min-height: 100%; display: grid; grid-template-rows: auto 1fr auto; }
+
+@media only screen and (max-width: 1200px) {
+	header > div > div { width: 100%; }
+	main { width: 100% }
+	article { width: 100%; margin: 0; }
+	footer > div { width: 100% }
+	div.side { display: none }
+}
