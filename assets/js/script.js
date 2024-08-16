@@ -8,6 +8,7 @@ function loadJSON(url) {
 		});
 }
 
+const dizFonti = {"gu":"https://www.gazzettaufficiale.it/eli/"}
 const dizVar = {"AN":"Annessione da stato estero","AP":"Cambio appartenenza Provincia","AQ":"Acquisizione territorio","AQES":"Acquisizione per estinzione","AS":"Cessione a stato estero","CD":"Cambio denominazione","CDAP":"Cambio nome e appartenenza Provincia","CE":"Cessione territorio","CECS":"Cessione territorio per costituzione nuova unità","CS":"Costituzione","CSCT":"Costituzione per cambio tipologia","CT":"Cambio tipologia di statuto","ES":"Estinzione","ESCT":"Estinzione per cambio tipologia","PV":"Prima validità","RN":"Rinumerazione del codice statistico","VACST":"Cambio tipologia di statuto"}
 const dizTipo = {"11":"Provincia","12":"Provincia autonoma","13":"Città metropolitana","14":"Libero consorzio di comuni","15":"Unità non amministrativa","21":"Compartimento","22":"Regione"}
 
@@ -139,7 +140,17 @@ Promise.all(fileCaricati)
 				// Aggiunta del provvedimento se è cambiato
 				if (a.p !== ultimoProv) {
 					const provv = db_doc.filter(q => q.ip === a.p).map(ss => {
-						let sx = `<p class='p'>${ss.ev}<br/>&#xE201; ${ss.e1}`;
+						let sx = `<p class='p'>${ss.ev}<br/>&#xE201; `;
+						if (ss.u) {
+							let pUrl = ss.u.split(/:(.+)/);
+							if (pUrl[0].length == 2) {
+								sx += `<a href='${[dizFonti[pUrl[0]]}${pUrl[1]}'>${ss.e1}</a>`;
+							} else {
+								sx += `<a href='${ss.u}'>${ss.e1}</a>`;
+							}
+						} else {
+							sx += `${ss.e1}`;
+						}
 						if (ss.d1) sx += ` ${ss.d1}`;
 						if (ss.e2) sx += ` in ${ss.e2}`;
 						if (ss.d2) sx += `, ${ss.d2}</p>`;
