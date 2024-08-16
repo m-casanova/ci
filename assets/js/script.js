@@ -144,7 +144,7 @@ Promise.all(fileCaricati)
 						if (ss.u) {
 							let pUrl = ss.u.split(/:(.+)/);
 							if (pUrl[0].length == 2) {
-								sx += `<a href='${[dizFonti[pUrl[0]]}${pUrl[1]}'>${ss.e1}</a>`;
+								sx += `<a href='${dizFonti[pUrl[0]]}${pUrl[1]}'>${ss.e1}</a>`;
 							} else {
 								sx += `<a href='${ss.u}'>${ss.e1}</a>`;
 							}
