@@ -1,4 +1,4 @@
-I dati sono [rilasciati da ISTAT sul sito SITUAS](https://situas.istat.it/) con licenza CC BY 4.0 Internation.
+I dati sono [rilasciati da ISTAT sul sito SITUAS](https://situas.istat.it/) con licenza CC BY 4.0 International.
 
 Attribution 4.0 International
 
