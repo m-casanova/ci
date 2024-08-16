@@ -140,7 +140,7 @@ Promise.all(fileCaricati)
 				// Aggiunta del provvedimento se è cambiato
 				if (a.p !== ultimoProv) {
 					const provv = db_doc.filter(q => q.ip === a.p).map(ss => {
-						let sx = `<p class='p'>${ss.ev}<br/>&#xE201; `;
+						let sx = `<p class='t'>${ss.ev}</p><p class='i'>&#xE201; `;
 						if (ss.u) {
 							let pUrl = ss.u.split(/:(.+)/);
 							if (pUrl[0].length == 2) {
@@ -151,9 +151,13 @@ Promise.all(fileCaricati)
 						} else {
 							sx += `${ss.e1}`;
 						}
-						if (ss.d1) sx += ` ${ss.d1}`;
-						if (ss.e2) sx += ` in ${ss.e2}`;
-						if (ss.d2) sx += `, ${ss.d2}</p>`;
+						if (ss.d1) sx += `, ${ss.d1}`;
+						if (ss.e2) {
+							sx += ` (${ss.e2}`;
+							if (ss.d2) sx += `, ${ss.d2}`;
+							sx += `)`;
+						}
+						sx += `</p>`;
 						return sx;
 					}).join('');
 					htmlOutput += provv;
