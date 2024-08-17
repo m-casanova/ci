@@ -12,8 +12,8 @@ header { width: 100%; margin:0; padding:0 }
 header a { color: #fff }
 header a.b { color: #fff; text-decoration: none }
 header > div { width:100%; color: #fff }
-header > div.info { background: #048; }
-header > div.titolo { background: #06c; }
+header > div.info { background: #004d99; }
+header > div.titolo { background: #0066cc; }
 header > div > div { width: 1180px; margin: 0px auto; padding:0 }
 header div div p { margin:0; padding:10px; font-size: 12pt }
 header div div h1 { margin:0; padding:20px 10px; font-size: 40px; font-weight: 350; color: #fff }
@@ -53,17 +53,17 @@ h3.z { background-color:#800; }
 .risp { margin: 20px 0; font-weight: 400; }
 .elenco { margin: 20px 0; position: relative; padding: 0; }
 .el_data { position: relative; padding: 0 0 10px 24px; margin: 0 }
-.el_data::before { content: ""; position: absolute; left: 10px; top: 0; bottom: 0; width: 4px; background-color: #a3adb7; z-index: 0 }
+.el_data::before { content: ""; position: absolute; left: 10px; top: 0; bottom: 0; width: 4px; background-color: #6aaaeb; z-index: 0 }
 .el_data:first-child::before { top: 10px }
 .el_data:last-child::before { height: 10px; }
-.punto { position: absolute; top: 5px; left: 0; width: 16px; height: 16px; background-color: #fff; border: 4px solid #929da9; border-radius: 50%; z-index: 1; }
+.punto { position: absolute; top: 5px; left: 0; width: 16px; height: 16px; background-color: #fff; border: 4px solid #4392E0; border-radius: 50%; z-index: 1; }
 .punto::before { content: ''; text-align: center; color: #fff; font-size: 15pt; }
 .pt1::before { top: 10px }
-.pt1 .punto { border-color: #5c6f82; background-color: #6ee7bf }
-.pt2 .punto { border-color: #768594 }
-.pt3 .punto { border-color: #768594 }
+.pt1 .punto { border-color: #0066cc; }
+.pt2 .punto { border-color: #207ad5 }
+.pt3 .punto { border-color: #207ad5 }
 .pt4::before { height: 10px }
-.pt4 .punto { border-color: #5c6f82; background-color: #ebadb8 }
+.pt4 .punto { border-color: #0066cc; }
 
 .risp p { margin: 0 10px 0 10px; padding:0 }
 .risp .d { font-weight: 700; margin-bottom: 5px }
