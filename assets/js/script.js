@@ -138,10 +138,10 @@ Promise.all(fileCaricati)
 				testa.innerHTML = `&#xE3C1; <span>${cerca.n}</span> &nbsp; [esistente]`;
 			}
 			mostra.appendChild(testa);
-			
+
 			/* esame delle variazioni */
 			variaz.forEach(a => {
-			
+
 				/* primo elemento */
 				const n1 = elementi[cat][a.i1];
 				const trCom = [{
@@ -202,34 +202,33 @@ Promise.all(fileCaricati)
 
 				/* esame provvedimenti */
 				if (a.p !== ultimoProv) {
-					const provv = db_doc.filter(q => q.ip === a.p).map(ss => {
-						const provP = document.createElement('p');
-						provP.className = 't';
-						provP.innerHTML = `&#xE201; `;
-						if (ss.u) {
-							const pUrl = ss.u.split(/:(.+)/);
-							const a = document.createElement('a');
-							a.href = pUrl[0].length == 2 ? `${dizFonti[pUrl[0]]}${pUrl[1]}` : ss.u;
-							a.textContent = ss.e1;
-							provP.appendChild(a);
-						} else {
-							provP.textContent += ss.e1;
-						}
-						if (ss.d1) provP.textContent += `, ${cData(ss.d1, 0)}`;
-						if (ss.e2) {
-							provP.textContent += ` (${ss.e2}`;
-							if (ss.d2) provP.textContent += `, ${cData(ss.d2, 0)}`;
-							provP.textContent += `)`;
-						}
-						htmlDiv.appendChild(provP);
+					const provv = db_doc[a.p];
+					const provP = document.createElement('p');
+					provP.className = 't';
+					provP.innerHTML = `&#xE201; `;
+					if (provv.u) {
+						const pUrl = provv.u.split(/:(.+)/);
+						const a = document.createElement('a');
+						a.href = pUrl[0].length == 2 ? `${dizFonti[pUrl[0]]}${pUrl[1]}` : provv.u;
+						a.textContent = provv.e1;
+						provP.innerHTML += a.outerHTML;
+					} else {
+						provP.textContent += provv.e1;
+					}
+					if (provv.d1) provP.innerHTML += `, ${cData(provv.d1, 0)}`;
+					if (provv.e2) {
+						provP.innerHTML += ` (${provv.e2}`;
+						if (provv.d2) provP.innerHTML += `, ${cData(provv.d2, 0)}`;
+						provP.innerHTML += `)`;
+					}
+					console.log(provP.outerHTML);
+					htmlDiv.appendChild(provP);
 
-						const infoP = document.createElement('p');
-						infoP.className = 'i';
-						infoP.textContent = ss.ev;
-						htmlDiv.appendChild(infoP);
+					const infoP = document.createElement('p');
+					infoP.className = 'i';
+					infoP.textContent = provv.ev;
+					htmlDiv.appendChild(infoP);
 
-						return true;
-					}).join('');
 					ultimoProv = a.p;
 				}
 
@@ -282,6 +281,19 @@ Promise.all(fileCaricati)
 				htmlDiv.appendChild(trComP);
 
 			});
+
+			if (!cerca.z || cerca.z != 1) {
+				htmlDiv = document.createElement('div');
+				htmlDiv.className = 'el_data';
+				const dataP = document.createElement('p');
+				htmlC = document.createElement('div');
+				htmlC.className = 'punto';
+				htmlDiv.appendChild(htmlC);
+				dataP.className = 'd';
+				dataP.innerHTML = 'Esistente';
+				htmlDiv.appendChild(dataP);
+				htmlOutput.appendChild(htmlDiv);
+			}
 
 			mostra.appendChild(htmlOutput);
 		}
