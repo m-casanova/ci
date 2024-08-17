@@ -188,15 +188,15 @@ Promise.all(fileCaricati)
 				}
 
 				/* colore del punto in relazione alla variazione */
-				if (htmlC) {
+				if (htmlDiv) {
 					if (['AN','CS','PV'].includes(trCom[0].t)) {
-						htmlC.classList.add('pt1');
+						htmlDiv.classList.add('pt1');
 					} else if (['AQ','AQES'].includes(trCom[0].t)) {
-						htmlC.classList.add('pt2');
+						htmlDiv.classList.add('pt2');
 					} else if (['CE','CECS'].includes(trCom[0].t)) {
-						htmlC.classList.add('pt3');
+						htmlDiv.classList.add('pt3');
 					} else if (['AS','ES'].includes(trCom[0].t)) {
-						htmlC.classList.add('pt4');
+						htmlDiv.classList.add('pt4');
 					}
 				}
 
