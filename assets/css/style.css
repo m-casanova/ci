@@ -50,12 +50,25 @@ h3.z { background-color:#800; }
 .sugg div:hover, .sugg div.active, .sugg div:hover span, .sugg div.active span { background: #06c; color: #fff; }
 .sugg span { font-size: 80%; color: #999 }
 
-.risp { margin-top: 20px; font-weight: 400; }
-.risp .d { font-weight: 600; }
-.risp .t { margin-left: 30px; font-size: 16pt }
+.risp { margin: 20px 0; font-weight: 400; }
+.elenco { margin: 20px 0; position: relative; padding: 0; }
+.el_data { position: relative; padding: 0 0 10px 24px; margin: 0 }
+.el_data::before { content: ""; position: absolute; left: 10px; top: 0; bottom: 0; width: 4px; background-color: #929da9; z-index: 0 }
+.el_data:first-child::before { top: 10px }
+.el_data:last-child::before { height: 10px; }
+.punto { position: absolute; top: 5px; left: 0px; width: 16px; height: 16px; background-color: #fff; border: 4px solid #929da9; border-radius: 50%; z-index: 1; }
+.punto::before { content: ''; text-align: center; color: #fff; font-size: 15pt; }
+.pt1 { border-color: #006644; }
+.pt2 { border-color: #00cc88; }
+.pt3 { border-color: #e08593; }
+.pt4 { border-color: #b32d43; }
+
+.risp p { margin: 0 10px 0 10px; padding:0 }
+.risp .d { font-weight: 700; margin-bottom: 5px }
+.risp .t { margin-left: 20px; font-size: 16pt }
 .risp .i { margin-left: 30px; font-size: 13pt }
 .risp .e { margin-left: 50px; font-size: 14pt }
-.risp .se { color: #800; font-weight: bold }
+.risp .se { color: #992639; font-weight: bold }
 
 .spinner-container { display: none }
 .wrapper { min-height: 100%; display: grid; grid-template-rows: auto 1fr auto; }
