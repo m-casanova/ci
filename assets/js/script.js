@@ -20,16 +20,18 @@ const fileCaricati = [
 	loadJSON(baseUrl+'/assets/json/province.json'),
 	loadJSON(baseUrl+'/assets/json/regioni.json'),
 	loadJSON(baseUrl+'/assets/json/variaz.json'),
-	loadJSON(baseUrl+'/assets/json/provv.json')
+	loadJSON(baseUrl+'/assets/json/provv.json'),
+	loadJSON(baseUrl+'/assets/json/indice.json')
 ];
 
 Promise.all(fileCaricati)
-	.then(([json1, json2, json3, json4, json5]) => {
+	.then(([json1, json2, json3, json4, json5, json6]) => {
 		elementi[1] = json1;
 		elementi[2] = json2;
 		elementi[3] = json3;
 		db_var = json4;
 		db_doc = json5;
+		db_indice = json6;
 
 		document.getElementById('spinner').style.display = 'none';
 		document.getElementById('pagina').style.display = 'block';
@@ -42,7 +44,7 @@ Promise.all(fileCaricati)
 			const mostra = document.getElementById(`risp${cat}`);
 			if (!mostra) return;
 
-			const cerca = elementi[cat].find(a => a.io == eid);
+			const cerca = db_indice[cat][eid];
 			if (!cerca) return;
 
 			const casellaInput = document.getElementById(`cerca${cat}`);
@@ -50,16 +52,27 @@ Promise.all(fileCaricati)
     				casellaInput.value = cerca.n;
 			}
 
-			const valori = new Set(elementi[cat].filter(a => a.io == eid).map(a => a.id));
+			const valori = cerca.s;
 			window.history.pushState({}, 'ComunItaliani', `?id=${eid}&t=${cat}`);
 
-			const variaz = db_var.filter(a => a.a == cat && (valori.has(a.i1) || valori.has(a.i2)));
+			const variaz = db_var.filter(a => a.a == cat && (valori.includes(a.i1) || valori.includes(a.i2)));
+
+			function vData(data) {
+				return new Date(data.split('/').reverse().join('-'));
+			}
+
+			function cData(data,n) {
+			  const mesi = ["gennaio", "febbraio", "marzo", "aprile", "maggio", "giugno","luglio", "agosto", "settembre", "ottobre", "novembre", "dicembre"];
+			  const [giorno, mese, anno] = data.split("/");
+			  const mese2 = mesi[parseInt(mese) - 1];
+			  const giorno2 = (parseInt(giorno)>1)?parseInt(giorno):parseInt(giorno)+'º';
+			  if (n == 1) return `${anno} (${giorno2} ${mese2})`;
+			  return `${giorno2} ${mese2} ${anno}`;
+			}
 
 			variaz.sort((a, b) => {
-				const [dayA, monthA, yearA] = a.d.split('/').map(Number);
-				const [dayB, monthB, yearB] = b.d.split('/').map(Number);
-				const dateA = new Date(yearA, monthA - 1, dayA);
-				const dateB = new Date(yearB, monthB - 1, dayB);
+				const dateA = vData(a.d);
+				const dateB = vData(b.d);
 
 				if (dateA - dateB !== 0) {
 					return dateA - dateB;
@@ -69,8 +82,8 @@ Promise.all(fileCaricati)
 					return a.p - b.p;
 				}
 
-				const n1 = elementi[cat].find(q => q.id === a.i1);
-				const n2 = elementi[cat].find(q => q.id === b.i1);
+				const n1 = elementi[cat][a.i1];
+				const n2 = elementi[cat][b.i1];
 
 				if (n1.io == eid) {
 					if (n2.io == eid) {
@@ -99,10 +112,16 @@ Promise.all(fileCaricati)
 
 			let ultimaData = '';
 			let ultimoProv = '';
-			let htmlOutput = '';
+
+			let htmlOutput;
+			if (cerca.z == 1) {
+				htmlOutput = `<h3 class="z">&#xE320; <span>${cerca.n}</span> &nbsp; [cessato]</h3>`;
+			} else {
+				htmlOutput = `<h3>&#xE3C1; <span>${cerca.n}</span> &nbsp; [esistente]</h3>`;
+			}
 
 			variaz.forEach(a => {
-				const n1 = elementi[cat].find(q => q.id === a.i1);
+				const n1 = elementi[cat][a.i1];
 				const trCom = [{
 					t: a.t1,
 					ct: n1.t,
@@ -114,7 +133,7 @@ Promise.all(fileCaricati)
 				}];
 
 				if (a.i2 > 0) {
-					const n2 = elementi[cat].find(q => q.id === a.i2);
+					const n2 = elementi[cat][a.i2];
 					trCom.push({
 						t: a.t2,
 						ct: n2.t,
@@ -125,22 +144,19 @@ Promise.all(fileCaricati)
 						w: ''
 					});
 
-					// Scambio degli elementi
 					if (n1.io != eid && n2.io == eid && a.t2) {
 						[trCom[0], trCom[1]] = [trCom[1], trCom[0]];
 					}
 				}
 
-				// Aggiunta della data se è cambiata
 				if (a.d !== ultimaData) {
-					htmlOutput += `<p class='d'>${a.d}</p>`;
+					htmlOutput += `<p class='d'>&#xE103; ${cData(a.d,1)}</p>`;
 					ultimaData = a.d;
 				}
 
-				// Aggiunta del provvedimento se è cambiato
 				if (a.p !== ultimoProv) {
 					const provv = db_doc.filter(q => q.ip === a.p).map(ss => {
-						let sx = `<p class='t'>${ss.ev}</p><p class='i'>&#xE201; `;
+						let sx = `<p class='t'>&#xE201; `;
 						if (ss.u) {
 							let pUrl = ss.u.split(/:(.+)/);
 							if (pUrl[0].length == 2) {
@@ -151,42 +167,40 @@ Promise.all(fileCaricati)
 						} else {
 							sx += `${ss.e1}`;
 						}
-						if (ss.d1) sx += `, ${ss.d1}`;
+						if (ss.d1) sx += `, ${cData(ss.d1,0)}`;
 						if (ss.e2) {
 							sx += ` (${ss.e2}`;
-							if (ss.d2) sx += `, ${ss.d2}`;
+							if (ss.d2) sx += `, ${cData(ss.d2,0)}`;
 							sx += `)`;
 						}
-						sx += `</p>`;
+						sx += `</p><p class='i'>${ss.ev}</p>`;
 						return sx;
 					}).join('');
 					htmlOutput += provv;
 					ultimoProv = a.p;
 				}
 
-				// Aggiunta dei dati supplementari per la provincia dei comuni
 				if (cat == 1) {
 					trCom.forEach(tc => {
-						const sups = elementi[2].filter(r => r.c == tc.c.substring(0, 3));
+						const sups = Object.keys(elementi[2]).filter(key => elementi[2][key].c == tc.c.substring(0, 3)).map(key => elementi[2][key]);
 						let sup;
 						sups.forEach(sp => {
 							sp.d.forEach(dd => {
-								const data1 = new Date(dd.a.split('/').reverse().join('-'));
-								const dataN = new Date(a.d.split('/').reverse().join('-'));
-								const data2 = dd.z ? new Date(dd.z.split('/').reverse().join('-')) : null;
+								const data1 = vData(dd.a);
+								const dataN = vData(a.d);
+								const data2 = dd.z ? vData(dd.z) : null;
 								
-								const isValid = data2 ? (dataN >= data1 && dataN < data2) : (dataN >= data1);
+								const isValid = data2 ? (dataN >= data1 && dataN <= data2) : (dataN >= data1);
 
 								if (isValid) {
 									sup = sp;
 								}
 							});
 						});
-						if (sup) tc.w = ` (<a href="?id=${sup.io}&t=2" target="_self">${sup.n}</a>)`;
+						if (sup) tc.w = `, <a href="?id=${sup.io}&t=2" target="_self">${sup.n}</a>`;
 					});
 				}
 
-				// Creazione degli elementi HTML
 				if (cat == 1) {
 					htmlOutput += `<p class='e'><b>${trCom[0].n}</b>${trCom[0].w} [${trCom[0].c}] : ${dizVar[trCom[0].t]}</p>`;
 				} else {
@@ -204,7 +218,6 @@ Promise.all(fileCaricati)
 				}
 			});
 
-			// Aggiornamento del contenuto in un'unica operazione
 			mostra.innerHTML = htmlOutput;
 		}
 
@@ -266,7 +279,7 @@ Promise.all(fileCaricati)
 				let startsWithMatches = [];
 				let containsMatches = [];
 
-				elementi[category].forEach(item => {
+				for (const [key,item] of Object.entries(elementi[category])) {
 					const normalizedN = normalizeText(item.n);
 					const normalizedN2 = normalizeText(item.n2 || '');
 
@@ -277,7 +290,7 @@ Promise.all(fileCaricati)
 					} else if (normalizedN.includes(query) || normalizedN2.includes(query)) {
 						containsMatches.push(item);
 					}
-				});
+				};
 
 				let filteredSuggestions = [...exactMatches, ...startsWithMatches, ...containsMatches].slice(0, 5);
 
@@ -289,7 +302,6 @@ Promise.all(fileCaricati)
 					suggestionsBox.innerHTML = suggestionsHtml;
 					suggestionsBox.style.display = 'block';
 
-					// Assegna l'evento click a ciascun suggerimento dopo la creazione del DOM
 					suggestionsBox.querySelectorAll('div').forEach(div => {
 						div.addEventListener('click', function() {
 							input.value = div.innerHTML.replace(/<br><span>.*?<\/span>/g, '');
@@ -327,8 +339,6 @@ Promise.all(fileCaricati)
 				}
 			});
 		}
-
-
 	})
 	.catch(error => {
 		console.error('Errore durante il caricamento dei dati:', error);
