@@ -36,31 +36,41 @@ Promise.all(fileCaricati)
 		document.getElementById('spinner').style.display = 'none';
 		document.getElementById('pagina').style.display = 'block';
 
+		/* imposta ricerca per i tre elementi */
 		[1, 2, 3].forEach(impostaRicerca);
 
+		/* aggiornamento dei dati visualizzati */
 		function aggiorna(cat, eid) {
 			if (cat < 1 || cat > 3) return;
 
+			/* contenitore dei risultati */
 			const mostra = document.getElementById(`risp${cat}`);
 			if (!mostra) return;
+			mostra.innerHTML = '';
 
+			/* verifica se esiste un elemento con valore eid */
 			const cerca = db_indice[cat][eid];
 			if (!cerca) return;
 
+			/* casella di inserimento */
 			const casellaInput = document.getElementById(`cerca${cat}`);
 			if (casellaInput.value === "") {
     				casellaInput.value = cerca.n;
 			}
 
+			/* cerca valori degli enti corrispondenti a eid */
 			const valori = cerca.s;
 			window.history.pushState({}, 'ComunItaliani', `?id=${eid}&t=${cat}`);
 
+			/* cerca tutte le variazioni per i valori trovati */
 			const variaz = db_var.filter(a => a.a == cat && (valori.includes(a.i1) || valori.includes(a.i2)));
 
+			/* data per il calcolo */
 			function vData(data) {
 				return new Date(data.split('/').reverse().join('-'));
 			}
 
+			/* date per le variazioni e per i provvedimenti */
 			function cData(data,n) {
 			  const mesi = ["gennaio", "febbraio", "marzo", "aprile", "maggio", "giugno","luglio", "agosto", "settembre", "ottobre", "novembre", "dicembre"];
 			  const [giorno, mese, anno] = data.split("/");
@@ -70,6 +80,7 @@ Promise.all(fileCaricati)
 			  return `${giorno2} ${mese2} ${anno}`;
 			}
 
+			/* ordinamento delle variazioni */
 			variaz.sort((a, b) => {
 				const dateA = vData(a.d);
 				const dateB = vData(b.d);
@@ -109,18 +120,29 @@ Promise.all(fileCaricati)
 				return a.c - b.c;
 			});
 
-
+			/* elementi per raggruppare date e provvedimenti uguali */
 			let ultimaData = '';
 			let ultimoProv = '';
 
-			let htmlOutput;
-			if (cerca.z == 1) {
-				htmlOutput = `<h3 class="z">&#xE320; <span>${cerca.n}</span> &nbsp; [cessato]</h3>`;
-			} else {
-				htmlOutput = `<h3>&#xE3C1; <span>${cerca.n}</span> &nbsp; [esistente]</h3>`;
-			}
+			/* struttura HTML */
+			let htmlOutput = document.createElement('div');
+			htmlOutput.className = "elenco";
+			let htmlDiv;
 
+			/* crea titolo */
+			let testa = document.createElement('h3');
+			if (cerca.z == 1) {
+				testa.className = 'z';
+				testa.innerHTML = `&#xE320; <span>${cerca.n}</span> &nbsp; [cessato]`;
+			} else {
+				testa.innerHTML = `&#xE3C1; <span>${cerca.n}</span> &nbsp; [esistente]`;
+			}
+			mostra.appendChild(testa);
+			
+			/* esame delle variazioni */
 			variaz.forEach(a => {
+			
+				/* primo elemento */
 				const n1 = elementi[cat][a.i1];
 				const trCom = [{
 					t: a.t1,
@@ -132,6 +154,7 @@ Promise.all(fileCaricati)
 					w: ''
 				}];
 
+				/* secondo elemento */
 				if (a.i2 > 0) {
 					const n2 = elementi[cat][a.i2];
 					trCom.push({
@@ -149,37 +172,69 @@ Promise.all(fileCaricati)
 					}
 				}
 
+				/* data della variazione */
 				if (a.d !== ultimaData) {
-					htmlOutput += `<p class='d'>&#xE103; ${cData(a.d,1)}</p>`;
+					htmlDiv = document.createElement('div');
+					htmlDiv.className = 'el_data';
+					htmlC = document.createElement('div');
+					htmlC.className = 'punto';
+					htmlDiv.appendChild(htmlC);
+					const dataP = document.createElement('p');
+					dataP.className = 'd';
+					dataP.innerHTML = cData(a.d, 1);
+					htmlDiv.appendChild(dataP);
+					htmlOutput.appendChild(htmlDiv);
 					ultimaData = a.d;
 				}
 
+				/* colore del punto in relazione alla variazione */
+				if (htmlC) {
+					if (['AN','CS','PV'].includes(trCom[0].t)) {
+						htmlC.classList.add('pt1');
+					} else if (['AQ','AQES'].includes(trCom[0].t)) {
+						htmlC.classList.add('pt2');
+					} else if (['CE','CECS'].includes(trCom[0].t)) {
+						htmlC.classList.add('pt3');
+					} else if (['AS','ES'].includes(trCom[0].t)) {
+						htmlC.classList.add('pt4');
+					}
+				}
+
+				/* esame provvedimenti */
 				if (a.p !== ultimoProv) {
 					const provv = db_doc.filter(q => q.ip === a.p).map(ss => {
-						let sx = `<p class='t'>&#xE201; `;
+						const provP = document.createElement('p');
+						provP.className = 't';
+						provP.innerHTML = `&#xE201; `;
 						if (ss.u) {
-							let pUrl = ss.u.split(/:(.+)/);
-							if (pUrl[0].length == 2) {
-								sx += `<a href='${dizFonti[pUrl[0]]}${pUrl[1]}'>${ss.e1}</a>`;
-							} else {
-								sx += `<a href='${ss.u}'>${ss.e1}</a>`;
-							}
+							const pUrl = ss.u.split(/:(.+)/);
+							const a = document.createElement('a');
+							a.href = pUrl[0].length == 2 ? `${dizFonti[pUrl[0]]}${pUrl[1]}` : ss.u;
+							a.textContent = ss.e1;
+							provP.appendChild(a);
 						} else {
-							sx += `${ss.e1}`;
+							provP.textContent += ss.e1;
 						}
-						if (ss.d1) sx += `, ${cData(ss.d1,0)}`;
+						if (ss.d1) provP.textContent += `, ${cData(ss.d1, 0)}`;
 						if (ss.e2) {
-							sx += ` (${ss.e2}`;
-							if (ss.d2) sx += `, ${cData(ss.d2,0)}`;
-							sx += `)`;
+							provP.textContent += ` (${ss.e2}`;
+							if (ss.d2) provP.textContent += `, ${cData(ss.d2, 0)}`;
+							provP.textContent += `)`;
 						}
-						sx += `</p><p class='i'>${ss.ev}</p>`;
-						return sx;
+						htmlDiv.appendChild(provP);
+
+						const infoP = document.createElement('p');
+						infoP.className = 'i';
+						infoP.textContent = ss.ev;
+						htmlDiv.appendChild(infoP);
+
+						return true;
 					}).join('');
-					htmlOutput += provv;
 					ultimoProv = a.p;
 				}
 
+				const elemP = document.createElement('p');
+				elemP.className = 'e';
 				if (cat == 1) {
 					trCom.forEach(tc => {
 						const sups = Object.keys(elementi[2]).filter(key => elementi[2][key].c == tc.c.substring(0, 3)).map(key => elementi[2][key]);
@@ -189,7 +244,7 @@ Promise.all(fileCaricati)
 								const data1 = vData(dd.a);
 								const dataN = vData(a.d);
 								const data2 = dd.z ? vData(dd.z) : null;
-								
+
 								const isValid = data2 ? (dataN >= data1 && dataN <= data2) : (dataN >= data1);
 
 								if (isValid) {
@@ -197,30 +252,41 @@ Promise.all(fileCaricati)
 								}
 							});
 						});
-						if (sup) tc.w = `, <a href="?id=${sup.io}&t=2" target="_self">${sup.n}</a>`;
+						if (sup) {
+							const supLink = document.createElement('a');
+							supLink.href = `?id=${sup.io}&t=2`;
+							supLink.target = "_self";
+							supLink.textContent = sup.n;
+							tc.w = `, ` + supLink.outerHTML;
+						}
 					});
-				}
-
-				if (cat == 1) {
-					htmlOutput += `<p class='e'><b>${trCom[0].n}</b>${trCom[0].w} [${trCom[0].c}] : ${dizVar[trCom[0].t]}</p>`;
+					elemP.innerHTML = `<b>${trCom[0].n}</b>${trCom[0].w} [${trCom[0].c}] : ${dizVar[trCom[0].t]}`;
 				} else {
-					htmlOutput += `<p class='e'><b>${trCom[0].n}</b> [${dizTipo[trCom[0].ct]} ${trCom[0].c}] : ${dizVar[trCom[0].t]}</p>`;
+					elemP.innerHTML = `<b>${trCom[0].n}</b> [${dizTipo[trCom[0].ct]} ${trCom[0].c}] : ${dizVar[trCom[0].t]}`;
 				}
+				htmlDiv.appendChild(elemP);
+
+				const trComP = document.createElement('p');
+				trComP.className = 'e';
 				if (trCom[1]) {
-					trCom[1].n = eid != trCom[1].io 
-						? `<a href='?id=${trCom[1].io}&t=${cat}' target="_self">${trCom[1].n}</a>` 
-						: `<b>${trCom[1].n}</b>`;
-					htmlOutput += `<p class='e'>&#xE011; ${dizVar[trCom[1].t] || dizVar[trCom[0].t]} : ${trCom[1].n}${trCom[1].w} [${trCom[1].c}]</p>`;
+					if (eid != trCom[1].io) {
+						trComP.innerHTML = `&#xE011; ${dizVar[trCom[1].t] || dizVar[trCom[0].t]} : <a href='?id=${trCom[1].io}&t=${cat}' target="_self">${trCom[1].n}</a>${trCom[1].w} [${trCom[1].c}]`;
+					} else {
+						trComP.innerHTML = `&#xE011; ${dizVar[trCom[1].t] || dizVar[trCom[0].t]} : <b>${trCom[1].n}</b>${trCom[1].w} [${trCom[1].c}]`;
+					}
 				} else if (a.i2 == -1) {
-					htmlOutput += `<p class='e'>&#xE011; <span class="se">Stato estero</span></p>`;
+					trComP.innerHTML = `&#xE011; <span class="se">Stato estero</span>`;
 				} else if (a.i2 == -2) {
-					htmlOutput += `<p class='e'>&#xE011; Da territorio non censito</p>`;
+					trComP.innerHTML = `&#xE011; Da territorio non censito`;
 				}
+				htmlDiv.appendChild(trComP);
+
 			});
 
-			mostra.innerHTML = htmlOutput;
+			mostra.appendChild(htmlOutput);
 		}
 
+		/* lettura parametri da url e aggiornamento della visualizzazione */
 		function getQueryParams() {
 			const params = new URLSearchParams(window.location.search);
 			return {
@@ -249,6 +315,7 @@ Promise.all(fileCaricati)
 			}
 		}
 
+		/* sistema tab */
 		document.querySelectorAll('.tab').forEach(tab => {
 			tab.addEventListener('click', function() {
 				document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
@@ -262,6 +329,7 @@ Promise.all(fileCaricati)
 			return text.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
 		}
 
+		/* funzione di ricerca con inserimento del testo */
 		function impostaRicerca(category) {
 			const input = document.getElementById('cerca' + category);
 			const suggestionsBox = document.getElementById('sugg' + category);
