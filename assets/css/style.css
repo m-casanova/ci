@@ -56,12 +56,14 @@ h3.z { background-color:#800; }
 .el_data::before { content: ""; position: absolute; left: 10px; top: 0; bottom: 0; width: 4px; background-color: #929da9; z-index: 0 }
 .el_data:first-child::before { top: 10px }
 .el_data:last-child::before { height: 10px; }
-.punto { position: absolute; top: 5px; left: 0px; width: 16px; height: 16px; background-color: #fff; border: 4px solid #929da9; border-radius: 50%; z-index: 1; }
+.punto { position: absolute; top: 5px; left: 0; width: 16px; height: 16px; background-color: #fff; border: 4px solid #929da9; border-radius: 50%; z-index: 1; }
 .punto::before { content: ''; text-align: center; color: #fff; font-size: 15pt; }
-.pt1 { border-color: #006644; }
-.pt2 { border-color: #00cc88; }
-.pt3 { border-color: #e08593; }
-.pt4 { border-color: #b32d43; }
+.pt1::before { top: 10px }
+.pt1 .punto { border-color: #008055; background-color: #008055 }
+.pt2 .punto { border-color: #008055; }
+.pt3 .punto { border-color: #cc334d; }
+.pt4::before { height: 10px }
+.pt4 .punto { border-color: #cc334d; background-color: #cc334d }
 
 .risp p { margin: 0 10px 0 10px; padding:0 }
 .risp .d { font-weight: 700; margin-bottom: 5px }
