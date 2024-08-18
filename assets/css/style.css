@@ -33,8 +33,10 @@ footer p { margin: 0 10px; font-size: 18px }
 footer a { color: #fff; font-weight: 450; }
 
 h2 { margin:30px 10px;padding:0; font-size: 32px; font-weight: 400; color: #048 }
-h3 { margin:35px 0px 25px;padding: 10px; background-color:#06c; font-size: 24px; font-weight: 500; color: #fff }
-h3 span { font-weight: 700; }
+h3 { margin:35px 0px 25px; padding: 10px; background-color:#06c; font-size: 24px; font-weight: 500; color: #fff; display: flex; }
+h3:before { content: ''; margin-right: 0; flex-shrink: 0; }
+h3.z:before { content: '' }
+h3 span { font-weight: 700; margin: 0 6px; }
 h3.z { background-color:#992639; }
 
 .tabs { display: flex; cursor: pointer; border-bottom: 2px solid #06c; }
