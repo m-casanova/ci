@@ -198,15 +198,6 @@ Promise.all(fileCaricati)
 							}
 						}
 
-						console.log(trCom[0].t);
-						if (htmlDiv) {
-							if (['AN','CS','PV'].includes(trCom[0].t)) {
-								htmlDiv.classList.add('pt1');
-							} else if (['AS','ES'].includes(trCom[0].t)) {
-								htmlDiv.classList.add('pt2');
-							}
-						}
-						
 						const elemP = document.createElement('p');
 						elemP.className = 'e';
 						if (cat == 1) {
