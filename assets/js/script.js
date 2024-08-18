@@ -111,15 +111,16 @@ Promise.all(fileCaricati)
 
 			/* struttura HTML */
 			let htmlOutput = document.createElement('div');
-			htmlOutput.className = "elenco";
 			let htmlDiv;
 
 			/* crea titolo */
 			let testa = document.createElement('h3');
 			if (cerca.z == 1) {
+				htmlOutput.className = "elencoz";
 				testa.className = 'z';
 				testa.innerHTML = `&#xE320; <span>${cerca.n}</span> [non esistente]`;
 			} else {
+				htmlOutput.className = "elenco";
 				testa.innerHTML = `&#xE3C1; <span>${cerca.n}</span> [esistente]`;
 			}
 			mostra.appendChild(testa);
