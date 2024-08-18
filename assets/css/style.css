@@ -58,10 +58,8 @@ h3.z { background-color:#992639; }
 .el_data:last-child::before { height: 10px; }
 .punto { position: absolute; top: 5px; left: 0; width: 16px; height: 16px; background-color: #fff; border: 4px solid #4392E0; border-radius: 50%; z-index: 1; }
 .punto::before { content: ''; text-align: center; color: #fff; font-size: 15pt; }
-.pt1::before { top: 10px }
-.pt1 .punto { border-color: #0066cc; }
-.pt2::before { height: 10px }
-.pt2 .punto { border-color: #0066cc; }
+.elencoz .el_data::before { background-color: #ebadb8; }
+.elencoz .punto { border: 4px solid #e08593; }
 
 .risp p { margin: 0 10px 0 10px; padding:0 }
 .risp .d { font-weight: 700; margin-bottom: 5px }
