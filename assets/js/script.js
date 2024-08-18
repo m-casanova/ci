@@ -8,7 +8,11 @@ function loadJSON(url) {
 		});
 }
 
-const dizFonti = {"gu":"https://www.gazzettaufficiale.it/eli/","lo":"http://www.consultazioniburl.servizirl.it/pdf/"}
+const dizFonti = {
+	"gu":"https://www.gazzettaufficiale.it/eli/$$",
+	"lo":"http://www.consultazioniburl.servizirl.it/pdf/$$"
+	"lb":"https://www.consultazioniburl.servizirl.it/ConsultazioneBurl/ApriAllegato?apriAllegato=&idBurl=$$"
+}
 const dizVar = {"AN":"Annessione da stato estero","AP":"Cambio appartenenza Provincia","AQ":"Acquisizione territorio","AQES":"Acquisizione per estinzione","AS":"Cessione a stato estero","CD":"Cambio denominazione","CDAP":"Cambio nome e appartenenza Provincia","CE":"Cessione territorio","CECS":"Cessione territorio per costituzione nuova unità","CS":"Costituzione","CSCT":"Costituzione per cambio tipologia","CT":"Cambio tipologia di statuto","ES":"Estinzione","ESCT":"Estinzione per cambio tipologia","PV":"Prima validità","RN":"Rinumerazione del codice statistico","VACST":"Cambio tipologia di statuto"}
 const dizTipo = {"11":"Provincia","12":"Provincia autonoma","13":"Città metropolitana","14":"Libero consorzio di comuni","15":"Unità non amministrativa","21":"Compartimento","22":"Regione"}
 
@@ -149,7 +153,7 @@ Promise.all(fileCaricati)
 				if (provv.u) {
 					const pUrl = provv.u.split(/:(.+)/);
 					const aUrl = document.createElement('a');
-					aUrl.href = pUrl[0].length == 2 ? `${dizFonti[pUrl[0]]}${pUrl[1]}` : provv.u;
+					aUrl.href = pUrl[0].length == 2 ? `${dizFonti[pUrl[0]].replace(/\$\$/,pUrl[1])}` : provv.u;
 					aUrl.textContent = provv.e1;
 					provP.innerHTML += aUrl.outerHTML;
 				} else {
