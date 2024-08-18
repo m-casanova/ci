@@ -63,8 +63,22 @@ Promise.all(fileCaricati)
 			window.history.pushState({}, 'ComunItaliani', `?id=${eid}&t=${cat}`);
 
 			/* cerca tutte le variazioni per i valori trovati */
-			const variaz = db_var.filter(a => a.a == cat && (valori.includes(a.i1) || valori.includes(a.i2)));
+			let variaz1 = {};
+			for (const in1 of cerca.v) {
+				if (db_var[in1]) {
+					const { d, p, t, a } = db_var[in1];
 
+					const filtroA = {};
+					const filtrati = a[cat].filter(({ i1, i2 }) => valori.includes(i1) || valori.includes(i2));
+					if (filtrati.length > 0) {
+						filtroA[cat] = filtrati;
+					}
+					if (Object.keys(filtroA).length > 0) {
+						variaz1[in1] = { d, p, t, a: filtroA };
+					}
+				}
+			}
+			
 			/* data per il calcolo */
 			function vData(data) {
 				return new Date(data.split('/').reverse().join('-'));
@@ -80,49 +94,20 @@ Promise.all(fileCaricati)
 			  return `${giorno2} ${mese2} ${anno}`;
 			}
 
-			/* ordinamento delle variazioni */
-			variaz.sort((a, b) => {
-				const dateA = vData(a.d);
-				const dateB = vData(b.d);
-
-				if (dateA - dateB !== 0) {
+			const variaz = Object.entries(variaz1)
+				.sort(([inA, elA], [inB, elB]) => {
+					const dateA = vData(elA.d);
+					const dateB = vData(elB.d);
+    
 					return dateA - dateB;
-				}
-
-				if (a.p !== b.p) {
-					return a.p - b.p;
-				}
-
-				const n1 = elementi[cat][a.i1];
-				const n2 = elementi[cat][b.i1];
-
-				if (n1.io == eid) {
-					if (n2.io == eid) {
-						if (b.t1.localeCompare(a.t1) !== 0) {
-							return b.t1.localeCompare(a.t1);
-						}
-					} else if (b.t2) {
-						if (b.t2.localeCompare(a.t1) !== 0) {
-							return b.t2.localeCompare(a.t1);
-						}
-					}
-				} else if (a.t2) {
-					if (n2.io == eid) {
-						if (b.t1.localeCompare(a.t2) !== 0) {
-							return b.t1.localeCompare(a.t2);
-						}
-					} else if (b.t2) {
-						if (b.t2.localeCompare(a.t2) !== 0) {
-							return b.t2.localeCompare(a.t2);
-						}
-					}
-				}
-				return a.c - b.c;
-			});
+				})
+				.reduce((acc, [in1, el1]) => {
+					acc[in1] = el1;
+					return acc;
+				}, {});
 
 			/* elementi per raggruppare date e provvedimenti uguali */
 			let ultimaData = '';
-			let ultimoProv = '';
 
 			/* struttura HTML */
 			let htmlOutput = document.createElement('div');
@@ -133,47 +118,17 @@ Promise.all(fileCaricati)
 			let testa = document.createElement('h3');
 			if (cerca.z == 1) {
 				testa.className = 'z';
-				testa.innerHTML = `&#xE320; <span>${cerca.n}</span> &nbsp; [cessato]`;
+				testa.innerHTML = `&#xE320; <span>${cerca.n}</span> [non esistente]`;
 			} else {
-				testa.innerHTML = `&#xE3C1; <span>${cerca.n}</span> &nbsp; [esistente]`;
+				testa.innerHTML = `&#xE3C1; <span>${cerca.n}</span> [esistente]`;
 			}
 			mostra.appendChild(testa);
 
 			/* esame delle variazioni */
-			variaz.forEach(a => {
+			for (const in1 in variaz) {
+				const { d, p, t, a } = variaz[in1];
 
-				/* primo elemento */
-				const n1 = elementi[cat][a.i1];
-				const trCom = [{
-					t: a.t1,
-					ct: n1.t,
-					n: n1.n + (n1.n2 ? `/${n1.n2}` : ''),
-					io: n1.io,
-					c: n1.c,
-					d: n1.d,
-					w: ''
-				}];
-
-				/* secondo elemento */
-				if (a.i2 > 0) {
-					const n2 = elementi[cat][a.i2];
-					trCom.push({
-						t: a.t2,
-						ct: n2.t,
-						n: n2.n + (n2.n2 ? `/${n2.n2}` : ''),
-						io: n2.io,
-						c: n2.c,
-						d: n2.d,
-						w: ''
-					});
-
-					if (n1.io != eid && n2.io == eid && a.t2) {
-						[trCom[0], trCom[1]] = [trCom[1], trCom[0]];
-					}
-				}
-
-				/* data della variazione */
-				if (a.d !== ultimaData) {
+				if (d !== ultimaData) {
 					htmlDiv = document.createElement('div');
 					htmlDiv.className = 'el_data';
 					htmlC = document.createElement('div');
@@ -181,106 +136,127 @@ Promise.all(fileCaricati)
 					htmlDiv.appendChild(htmlC);
 					const dataP = document.createElement('p');
 					dataP.className = 'd';
-					dataP.innerHTML = cData(a.d, 1);
+					dataP.innerHTML = cData(d,1);
 					htmlDiv.appendChild(dataP);
 					htmlOutput.appendChild(htmlDiv);
-					ultimaData = a.d;
+					ultimaData = d;
 				}
-
-				/* colore del punto in relazione alla variazione */
-				if (htmlDiv) {
-					if (['AN','CS','PV'].includes(trCom[0].t)) {
-						htmlDiv.classList.add('pt1');
-					} else if (['AQ','AQES'].includes(trCom[0].t)) {
-						htmlDiv.classList.add('pt2');
-					} else if (['CE','CECS'].includes(trCom[0].t)) {
-						htmlDiv.classList.add('pt3');
-					} else if (['AS','ES'].includes(trCom[0].t)) {
-						htmlDiv.classList.add('pt4');
-					}
+				const provv = db_doc[p];
+				const provP = document.createElement('p');
+				provP.className = 't';
+				provP.innerHTML = `&#xE201; `;
+				if (provv.u) {
+					const pUrl = provv.u.split(/:(.+)/);
+					const aUrl = document.createElement('a');
+					aUrl.href = pUrl[0].length == 2 ? `${dizFonti[pUrl[0]]}${pUrl[1]}` : provv.u;
+					aUrl.textContent = provv.e1;
+					provP.innerHTML += aUrl.outerHTML;
+				} else {
+					provP.textContent += provv.e1;
 				}
-
-				/* esame provvedimenti */
-				if (a.p !== ultimoProv) {
-					const provv = db_doc[a.p];
-					const provP = document.createElement('p');
-					provP.className = 't';
-					provP.innerHTML = `&#xE201; `;
-					if (provv.u) {
-						const pUrl = provv.u.split(/:(.+)/);
-						const a = document.createElement('a');
-						a.href = pUrl[0].length == 2 ? `${dizFonti[pUrl[0]]}${pUrl[1]}` : provv.u;
-						a.textContent = provv.e1;
-						provP.innerHTML += a.outerHTML;
-					} else {
-						provP.textContent += provv.e1;
-					}
-					if (provv.d1) provP.innerHTML += `, ${cData(provv.d1, 0)}`;
-					if (provv.e2) {
-						provP.innerHTML += ` (${provv.e2}`;
-						if (provv.d2) provP.innerHTML += `, ${cData(provv.d2, 0)}`;
-						provP.innerHTML += `)`;
-					}
-					console.log(provP.outerHTML);
-					htmlDiv.appendChild(provP);
-
-					const infoP = document.createElement('p');
-					infoP.className = 'i';
-					infoP.textContent = provv.ev;
-					htmlDiv.appendChild(infoP);
-
-					ultimoProv = a.p;
+				if (provv.d1) provP.innerHTML += `, ${cData(provv.d1, 0)}`;
+				if (provv.e2) {
+					provP.innerHTML += ` (${provv.e2}`;
+					if (provv.d2) provP.innerHTML += `, ${cData(provv.d2, 0)}`;
+					provP.innerHTML += `)`;
 				}
+				htmlDiv.appendChild(provP);
 
-				const elemP = document.createElement('p');
-				elemP.className = 'e';
-				if (cat == 1) {
-					trCom.forEach(tc => {
-						const sups = Object.keys(elementi[2]).filter(key => elementi[2][key].c == tc.c.substring(0, 3)).map(key => elementi[2][key]);
-						let sup;
-						sups.forEach(sp => {
-							sp.d.forEach(dd => {
-								const data1 = vData(dd.a);
-								const dataN = vData(a.d);
-								const data2 = dd.z ? vData(dd.z) : null;
+				const infoP = document.createElement('p');
+				infoP.className = 'i';
+				infoP.textContent = provv.ev;
+				htmlDiv.appendChild(infoP);
 
-								const isValid = data2 ? (dataN >= data1 && dataN <= data2) : (dataN >= data1);
+				for (const in2 in a) {
+					a[in2].forEach(({ i1, i2, t1, t2 }) => {
 
-								if (isValid) {
-									sup = sp;
+						const n1 = elementi[cat][i1];
+						const trCom = [{
+							t: t1 || t,
+							ct: n1.t,
+							n: n1.n + (n1.n2 ? `/${n1.n2}` : ''),
+							io: n1.io,
+							c: n1.c,
+							d: n1.d,
+							w: ''
+						}];
+						
+						if (i2 && i2 > 0) {
+							const n2 = elementi[cat][i2];
+							trCom.push({
+								t: t2,
+								ct: n2.t,
+								n: n2.n + (n2.n2 ? `/${n2.n2}` : ''),
+								io: n2.io,
+								c: n2.c,
+								d: n2.d,
+								w: ''
+							});
+
+							if (n1.io != eid && n2.io == eid && t2) {
+								[trCom[0], trCom[1]] = [trCom[1], trCom[0]];
+							}
+						}
+
+						console.log(trCom[0].t);
+						if (htmlDiv) {
+							if (['AN','CS','PV'].includes(trCom[0].t)) {
+								htmlDiv.classList.add('pt1');
+							} else if (['AS','ES'].includes(trCom[0].t)) {
+								htmlDiv.classList.add('pt2');
+							}
+						}
+						
+						const elemP = document.createElement('p');
+						elemP.className = 'e';
+						if (cat == 1) {
+							trCom.forEach(tc => {
+								const sups = Object.keys(elementi[2]).filter(key => elementi[2][key].c == tc.c.substring(0, 3)).map(key => elementi[2][key]);
+								let sup;
+								sups.forEach(sp => {
+									sp.d.forEach(dd => {
+										const data1 = vData(dd.a);
+										const dataN = vData(d);
+										const data2 = dd.z ? vData(dd.z) : null;
+
+										const isValid = data2 ? (dataN >= data1 && dataN <= data2) : (dataN >= data1);
+
+										if (isValid) {
+											sup = sp;
+										}
+									});
+								});
+								if (sup) {
+									const supLink = document.createElement('a');
+									supLink.href = `?id=${sup.io}&t=2`;
+									supLink.target = "_self";
+									supLink.textContent = sup.n;
+									tc.w = `, ` + supLink.outerHTML;
 								}
 							});
-						});
-						if (sup) {
-							const supLink = document.createElement('a');
-							supLink.href = `?id=${sup.io}&t=2`;
-							supLink.target = "_self";
-							supLink.textContent = sup.n;
-							tc.w = `, ` + supLink.outerHTML;
+							elemP.innerHTML = `<b>${trCom[0].n}</b>${trCom[0].w} [${trCom[0].c}] : ${dizVar[trCom[0].t]}`;
+						} else {
+							elemP.innerHTML = `<b>${trCom[0].n}</b> [${dizTipo[trCom[0].ct]} ${trCom[0].c}] : ${dizVar[trCom[0].t]}`;
 						}
+						htmlDiv.appendChild(elemP);
+
+						const trComP = document.createElement('p');
+						trComP.className = 'e';
+						if (trCom[1]) {
+							if (eid != trCom[1].io) {
+								trComP.innerHTML = `&#xE011; ${dizVar[trCom[1].t] || dizVar[trCom[0].t]} : <a href='?id=${trCom[1].io}&t=${cat}' target="_self">${trCom[1].n}</a>${trCom[1].w} [${trCom[1].c}]`;
+							} else {
+								trComP.innerHTML = `&#xE011; ${dizVar[trCom[1].t] || dizVar[trCom[0].t]} : <b>${trCom[1].n}</b>${trCom[1].w} [${trCom[1].c}]`;
+							}
+						} else if (a.i2 == -1) {
+							trComP.innerHTML = `&#xE011; <span class="se">Stato estero</span>`;
+						} else if (a.i2 == -2) {
+							trComP.innerHTML = `&#xE011; Da territorio non censito`;
+						}
+						htmlDiv.appendChild(trComP);
 					});
-					elemP.innerHTML = `<b>${trCom[0].n}</b>${trCom[0].w} [${trCom[0].c}] : ${dizVar[trCom[0].t]}`;
-				} else {
-					elemP.innerHTML = `<b>${trCom[0].n}</b> [${dizTipo[trCom[0].ct]} ${trCom[0].c}] : ${dizVar[trCom[0].t]}`;
 				}
-				htmlDiv.appendChild(elemP);
-
-				const trComP = document.createElement('p');
-				trComP.className = 'e';
-				if (trCom[1]) {
-					if (eid != trCom[1].io) {
-						trComP.innerHTML = `&#xE011; ${dizVar[trCom[1].t] || dizVar[trCom[0].t]} : <a href='?id=${trCom[1].io}&t=${cat}' target="_self">${trCom[1].n}</a>${trCom[1].w} [${trCom[1].c}]`;
-					} else {
-						trComP.innerHTML = `&#xE011; ${dizVar[trCom[1].t] || dizVar[trCom[0].t]} : <b>${trCom[1].n}</b>${trCom[1].w} [${trCom[1].c}]`;
-					}
-				} else if (a.i2 == -1) {
-					trComP.innerHTML = `&#xE011; <span class="se">Stato estero</span>`;
-				} else if (a.i2 == -2) {
-					trComP.innerHTML = `&#xE011; Da territorio non censito`;
-				}
-				htmlDiv.appendChild(trComP);
-
-			});
+			}
 
 			if (!cerca.z || cerca.z != 1) {
 				htmlDiv = document.createElement('div');
