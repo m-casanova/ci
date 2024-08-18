@@ -60,15 +60,13 @@ h3.z { background-color:#992639; }
 .punto::before { content: ''; text-align: center; color: #fff; font-size: 15pt; }
 .pt1::before { top: 10px }
 .pt1 .punto { border-color: #0066cc; }
-.pt2 .punto { border-color: #207ad5 }
-.pt3 .punto { border-color: #207ad5 }
-.pt4::before { height: 10px }
-.pt4 .punto { border-color: #0066cc; }
+.pt2::before { height: 10px }
+.pt2 .punto { border-color: #0066cc; }
 
 .risp p { margin: 0 10px 0 10px; padding:0 }
 .risp .d { font-weight: 700; margin-bottom: 5px }
-.risp .t { margin-left: 20px; font-size: 16pt }
-.risp .i { margin-left: 30px; font-size: 13pt }
+.risp .t { margin-left: 20px; font-size: 15pt }
+.risp .i { margin-left: 30px; font-size: 14pt }
 .risp .e { margin-left: 50px; font-size: 14pt }
 .risp .se { color: #992639; font-weight: bold }
 
