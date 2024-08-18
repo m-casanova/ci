@@ -51,7 +51,7 @@ h3.z { background-color:#992639; }
 .sugg span { font-size: 80%; color: #999 }
 
 .risp { margin: 20px 0; font-weight: 400; }
-.elenco { margin: 20px 0; position: relative; padding: 0; }
+.elenco, .elencoz { margin: 20px 0; position: relative; padding: 0; }
 .el_data { position: relative; padding: 0 0 10px 24px; margin: 0 }
 .el_data::before { content: ""; position: absolute; left: 10px; top: 0; bottom: 0; width: 4px; background-color: #6aaaeb; z-index: 0 }
 .el_data:first-child::before { top: 10px }
