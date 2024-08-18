@@ -124,10 +124,10 @@ Promise.all(fileCaricati)
 			if (cerca.z == 1) {
 				htmlOutput.className = "elencoz";
 				testa.className = 'z';
-				testa.innerHTML = `&#xE320; <span>${cerca.n}</span> [non esistente]`;
+				testa.innerHTML = `<span>${cerca.n}</span> [non esistente]`;
 			} else {
 				htmlOutput.className = "elenco";
-				testa.innerHTML = `&#xE3C1; <span>${cerca.n}</span> [esistente]`;
+				testa.innerHTML = `<span>${cerca.n}</span> [esistente]`;
 			}
 			mostra.appendChild(testa);
 
