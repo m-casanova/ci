@@ -49,7 +49,7 @@ h3.z { background-color:#992639; }
 
 .sugg { border: 1px solid #ddd; max-height: 220px; overflow-y: auto; margin-top: 5px; background: #fff; position: absolute; width: 300px; max-width: calc(100% - 22px); z-index: 1000; display: none; }
 .sugg div { padding: 10px; cursor: pointer; line-height: 1em; }
-.sugg div:hover, .sugg div.active { background-color: #94c4f5: color: #000 }
+.sugg div:hover, .sugg div.active { background-color: #94c4f5; color: #000 }
 .sugg div:hover .info, .sugg div.active .info { color: #000; }
 .sugg .f1 { color: #080 }
 .sugg .f0 { color: #800 }
