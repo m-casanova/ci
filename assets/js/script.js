@@ -351,14 +351,14 @@ Promise.all(fileCaricati)
 				if (filteredSuggestions.length > 0) {
 					const suggestionsHtml = filteredSuggestions.map(item => {
 						const description = category === 1 ? 'Comune' : dizTipo[item.t];
-						return `<div data-id="${item.io}">${item.n}<br/><span>${item.c} ${description}</span></div>`;
+						return `<div data-id="${item.io}">${item.n}<br/><span class="info"><span class="f${(db_indice[t][item.io].z == 1)?0:1}">◼</span> ${item.c} ${description}</span></div>`;
 					}).join('');
 					suggestionsBox.innerHTML = suggestionsHtml;
 					suggestionsBox.style.display = 'block';
 
 					suggestionsBox.querySelectorAll('div').forEach(div => {
 						div.addEventListener('click', function() {
-							input.value = div.innerHTML.replace(/<br><span>.*?<\/span>/g, '');
+							input.value = div.innerHTML.replace(/<br>.*?$/g, '');
 							suggestionsBox.style.display = 'none';
 							aggiorna(category, div.dataset.id);
 						});
@@ -377,12 +377,12 @@ Promise.all(fileCaricati)
 				} else if (e.key === 'ArrowUp') {
 					newActive = active ? active.previousElementSibling : suggestionsBox.lastElementChild;
 				} else if (e.key === 'Enter' && active) {
-					input.value = active.innerHTML.replace(/<br><span>.*?<\/span>/g, '');
+					input.value = active.innerHTML.replace(/<br>.*?$/g, '');
 					suggestionsBox.style.display = 'none';
 					aggiorna(category, active.dataset.id);
 				} else if (e.key === 'Enter' && suggestionsBox.childElementCount === 1) {
 					const singleSuggestion = suggestionsBox.firstElementChild;
-					input.value = singleSuggestion.innerHTML.replace(/<br><span>.*?<\/span>/g, '');
+					input.value = singleSuggestion.innerHTML.replace(/<br>.*^$/, '');
 					suggestionsBox.style.display = 'none';
 					aggiorna(category, singleSuggestion.dataset.id);
 				}
