@@ -351,7 +351,7 @@ Promise.all(fileCaricati)
 				if (filteredSuggestions.length > 0) {
 					const suggestionsHtml = filteredSuggestions.map(item => {
 						const description = category === 1 ? 'Comune' : dizTipo[item.t];
-						return `<div data-id="${item.io}">${item.n}<br/><span class="info"><span class="f${(db_indice[t][item.io].z == 1)?0:1}">◼</span> ${item.c} ${description}</span></div>`;
+						return `<div data-id="${item.io}">${item.n}<br/><span class="info"><span class="f${(db_indice[category][item.io].z == 1)?0:1}">◼</span> ${item.c} ${description}</span></div>`;
 					}).join('');
 					suggestionsBox.innerHTML = suggestionsHtml;
 					suggestionsBox.style.display = 'block';
