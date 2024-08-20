@@ -93,10 +93,10 @@ function aggiorna(cat, eid) {
 
 	const valori = cerca.s;
 
-    const currentParams = getQueryParams();
-    if (currentParams.id !== eid || currentParams.t !== cat.toString()) {
-        window.history.pushState({ id: eid, t: cat }, "", `?id=${eid}&t=${cat}`);
-    }
+	const currentParams = getQueryParams();
+	if (currentParams.id !== eid || currentParams.t !== cat.toString()) {
+		window.history.pushState({ id: eid, t: cat }, "", `?id=${eid}&t=${cat}`);
+	}
 	document.title = `ComunItaliani | ${cerca.n}`;
 
 	const variaz1 = {};
@@ -235,9 +235,9 @@ function aggiorna(cat, eid) {
 					} else {
 						trComP.innerHTML = `&#xE011; ${dizVar[trCom[1].t] || dizVar[trCom[0].t]} : <b>${trCom[1].n}</b>${trCom[1].w} [${trCom[1].c}]`;
 					}
-				} else if (a.i2 == -1) {
+				} else if (i2 == -1) {
 					trComP.innerHTML = `&#xE011; <span class="se">Stato estero</span>`;
-				} else if (a.i2 == -2) {
+				} else if (i2 == -2) {
 					trComP.innerHTML = `&#xE011; Da territorio non censito`;
 				}
 				htmlDiv.appendChild(trComP);
@@ -320,11 +320,11 @@ function impostaRicerca(category) {
 }
 
 function dbf(func, delay) {
-    let timeoutId;
-    return function (...args) {
-        clearTimeout(timeoutId);
-        timeoutId = setTimeout(() => func.apply(this, args), delay);
-    };
+	let timeoutId;
+	return function (...args) {
+		clearTimeout(timeoutId);
+		timeoutId = setTimeout(() => func.apply(this, args), delay);
+	};
 }
 
 function cercaSugg(category, query) {
@@ -364,17 +364,17 @@ function vData(data) {
 }
 
 function cData(data,n) {
-  const mesi = ["gennaio", "febbraio", "marzo", "aprile", "maggio", "giugno","luglio", "agosto", "settembre", "ottobre", "novembre", "dicembre"];
-  const [giorno, mese, anno] = data.split("/");
-  const mese2 = mesi[parseInt(mese) - 1];
-  const giorno2 = (parseInt(giorno)>1)?parseInt(giorno):parseInt(giorno)+'º';
-  if (n == 1) return `${anno} (${giorno2} ${mese2})`;
-  return `${giorno2} ${mese2} ${anno}`;
+	const mesi = ["gennaio", "febbraio", "marzo", "aprile", "maggio", "giugno","luglio", "agosto", "settembre", "ottobre", "novembre", "dicembre"];
+	const [giorno, mese, anno] = data.split("/");
+	const mese2 = mesi[parseInt(mese) - 1];
+	const giorno2 = (parseInt(giorno)>1)?parseInt(giorno):parseInt(giorno)+'º';
+	if (n == 1) return `${anno} (${giorno2} ${mese2})`;
+	return `${giorno2} ${mese2} ${anno}`;
 }
 
 function creaEl(t, c, ...f) {
-    const el = document.createElement(t);
-    if (c) el.className = c;
-    f.forEach(node => el.appendChild(typeof node === 'string' ? document.createTextNode(node) : node));
-    return el;
+	const el = document.createElement(t);
+	if (c) el.className = c;
+	f.forEach(node => el.appendChild(typeof node === 'string' ? document.createTextNode(node) : node));
+	return el;
 }
