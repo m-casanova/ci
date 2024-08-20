@@ -312,11 +312,6 @@ function impostaRicerca(category) {
 			newActive.classList.add('active');
 		}
 	});
-
-	input.addEventListener('blur', function() {
-		suggestionsBox.style.display = 'none';
-	});
-
 }
 
 function dbf(func, delay) {
