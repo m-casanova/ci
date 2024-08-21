@@ -13,6 +13,7 @@ const dizFonti = {
 	"lo":"http://www.consultazioniburl.servizirl.it/pdf/$$",
 	"lb":"https://www.consultazioniburl.servizirl.it/ConsultazioneBurl/ApriAllegato?apriAllegato=&idBurl=$$",
 	"pi":"http://serviziweb.csi.it/solverweb/IndexDocumentServlet?id=$$",
+	"sa":"https://leggiregionali.regione.sardegna.it/legge-regionale?$$",
 	"ta":"https://bollettino.regione.taa.it/pdf/$$"
 }
 const dizVar = {"AN":"Annessione da stato estero","AP":"Cambio appartenenza Provincia","AQ":"Acquisizione territorio","AQES":"Acquisizione per estinzione","AS":"Cessione a stato estero","CD":"Cambio denominazione","CDAP":"Cambio nome e appartenenza Provincia","CE":"Cessione territorio","CECS":"Cessione territorio per costituzione nuova unità","CS":"Costituzione","CSCT":"Costituzione per cambio tipologia","CT":"Cambio tipologia di statuto","ES":"Estinzione","ESCT":"Estinzione per cambio tipologia","PV":"Prima validità","RN":"Rinumerazione del codice statistico","VACST":"Cambio tipologia di statuto"}
@@ -144,15 +145,25 @@ function aggiorna(cat, eid) {
 
 		const provv = db_doc[p];
 		const provP = creaEl('p','t');
-		provP.innerHTML = '&#xE201; '
+		provP.innerHTML = '&#xE201; ';
 		if (provv.u) {
 			const pUrl = provv.u.split(/:(.+)/);
 			const aUrl = document.createElement('a');
 			aUrl.href = pUrl[0].length == 2 ? `${dizFonti[pUrl[0]].replace(/\$\$/,pUrl[1])}` : provv.u;
-			aUrl.textContent = provv.e1;
+			if (provv.t1) {
+				aUrl.textContent = provv.t1;
+				if (provv.n1) aUrl.textContent += ` n. ${provv.n1}`;
+			} else {
+				aUrl.textContent = provv.e1;
+			}
 			provP.innerHTML += aUrl.outerHTML;
 		} else {
-			provP.textContent += provv.e1;
+			if (provv.t1) {
+				provP.textContent += provv.t1;
+				if (provv.n1) provP.textContent += ` n. ${provv.n1}`;
+			} else {
+				provP.textContent += provv.e1;
+			}
 		}
 		if (provv.d1) provP.innerHTML += `, ${cData(provv.d1, 0)}`;
 		if (provv.e2) {
@@ -360,8 +371,9 @@ function vData(data) {
 
 function cData(data,n) {
 	const mesi = ["gennaio", "febbraio", "marzo", "aprile", "maggio", "giugno","luglio", "agosto", "settembre", "ottobre", "novembre", "dicembre"];
+	const mesi2 = ["gen.", "feb.", "mar.", "apr.", "mag.", "giu.","lug.", "ago.", "set.", "ott.", "nov.", "dic."];
 	const [giorno, mese, anno] = data.split("/");
-	const mese2 = mesi[parseInt(mese) - 1];
+	const mese2 = n==1?mesi[parseInt(mese) - 1]:mesi2[parseInt(mese) - 1];
 	const giorno2 = (parseInt(giorno)>1)?parseInt(giorno):parseInt(giorno)+'º';
 	if (n == 1) return `${anno} (${giorno2} ${mese2})`;
 	return `${giorno2} ${mese2} ${anno}`;
