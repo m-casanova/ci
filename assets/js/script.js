@@ -238,7 +238,7 @@ function aggiorna(cat, eid) {
 				} else if (i2 == -1) {
 					trComP.innerHTML = `&#xE011; <span class="se">Stato estero</span>`;
 				} else if (i2 == -2) {
-					trComP.innerHTML = `&#xE011; Da territorio non censito`;
+					trComP.innerHTML = `&#xE011; <span class="nc">Da territorio non censito</span>`;
 				}
 				htmlDiv.appendChild(trComP);
 			});
