@@ -110,12 +110,12 @@ function aggiorna(cat, eid) {
 		}
 	}
 
-	const variaz = Object.entries(variaz1)
-		.sort(([inA, elA], [inB, elB]) => dateA = vData(elA.d) - vData(elB.d) )
-		.reduce((acc, [in1, el1]) => {
-			acc[in1] = el1;
-			return acc;
-		}, {});
+	const variaz = Object.fromEntries(
+		Object.entries(variaz1)
+			.sort(([_, elA], [__, elB]) => 
+				vData(elA.d) - vData(elB.d) || elA.p - elB.p
+			)
+	);
 
 	let ultimaData;
 
@@ -230,7 +230,7 @@ function aggiorna(cat, eid) {
 							supLink.href = `?id=${sup.io}&t=2`;
 							supLink.target = "_self";
 							supLink.textContent = sup.n;
-							tc.w = `, ` + supLink.outerHTML;
+							tc.w = ', <i>' + supLink.outerHTML + '</i>';
 						}
 					});
 					elemP.innerHTML = `<b>${trCom[0].n}</b>${trCom[0].w} [${trCom[0].c}] : ${dizVar[trCom[0].t]}`;
