@@ -14,7 +14,8 @@ const dizFonti = {
 	"lb":"https://www.consultazioniburl.servizirl.it/ConsultazioneBurl/ApriAllegato?apriAllegato=&idBurl=$$",
 	"pi":"http://serviziweb.csi.it/solverweb/IndexDocumentServlet?id=$$",
 	"sa":"https://leggiregionali.regione.sardegna.it/legge-regionale?$$",
-	"ta":"https://bollettino.regione.taa.it/pdf/$$"
+	"si":"https://w3.ars.sicilia.it/lex/$$",
+	"ta":"https://bollettino.regione.taa.it/pdf/$$"	
 }
 const dizVar = {
 	"AN": "Annessione da stato estero",
