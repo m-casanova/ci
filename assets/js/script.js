@@ -16,7 +16,25 @@ const dizFonti = {
 	"sa":"https://leggiregionali.regione.sardegna.it/legge-regionale?$$",
 	"ta":"https://bollettino.regione.taa.it/pdf/$$"
 }
-const dizVar = {"AN":"Annessione da stato estero","AP":"Cambio appartenenza Provincia","AQ":"Acquisizione territorio","AQES":"Acquisizione per estinzione","AS":"Cessione a stato estero","CD":"Cambio denominazione","CDAP":"Cambio nome e appartenenza Provincia","CE":"Cessione territorio","CECS":"Cessione territorio per costituzione nuova unità","CS":"Costituzione","CSCT":"Costituzione per cambio tipologia","CT":"Cambio tipologia di statuto","ES":"Estinzione","ESCT":"Estinzione per cambio tipologia","PV":"Prima validità","RN":"Rinumerazione del codice statistico","VACST":"Cambio tipologia di statuto"}
+const dizVar = {
+	"AN": "Annessione da stato estero",
+	"AP": "Cambio di appartenenza Provincia",
+	"AQ": "Acquisizione di territorio",
+	"AQES": "Acquisizione di territorio per estinzione",
+	"AS": "Cessione a stato estero",
+	"CD": "Cambio di denominazione",
+	"CDAP": "Cambio di denominazione e appartenenza Provincia",
+	"CE": "Cessione parziale di territorio",
+	"CECS": "Cessione di territorio per costituzione di una nuova unità",
+	"CS": "Costituzione",
+	"CSCT": "Costituzione per cambio di tipologia",
+	"CT": "Cambio di tipologia di statuto",
+	"ES": "Estinzione",
+	"ESCT": "Estinzione per cambio di tipologia",
+	"PV": "Esistente al momento della costituzione del Regno d'Italia",
+	"RN": "Rinumerazione del codice statistico",
+	"VACST": "Cambio di tipologia di statuto"
+}
 const dizTipo = {"11":"Provincia","12":"Provincia autonoma","13":"Città metropolitana","14":"Libero consorzio di comuni","15":"Unità non amministrativa","21":"Compartimento","22":"Regione"}
 
 let elementi = [];
