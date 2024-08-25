@@ -129,12 +129,8 @@ function aggiorna(cat, eid) {
 		}
 	}
 
-	const variaz = Object.fromEntries(
-		Object.entries(variaz1)
-			.sort(([_, elA], [__, elB]) => 
-				vData(elA.d) - vData(elB.d) || elA.p - elB.p
-			)
-	);
+	const variaz = Object.entries(variaz1);
+	variaz.sort((a, b) => vData(a[1].d) - vData(b[1].d) || a[1].p - b[1].p );
 
 	let ultimaData;
 	let ultimoProvv;
@@ -152,8 +148,8 @@ function aggiorna(cat, eid) {
 	let htmlDiv = null;
 
 	/* esame delle variazioni */
-	for (const in1 in variaz) {
-		const { d, p, t, a } = variaz[in1];
+	variaz.forEach( w => {
+		const { d, p, t, a } = w[1];
 
 		if (d !== ultimaData) {
 			htmlDiv = creaEl('div','el_data',creaEl('div','punto'));
@@ -278,7 +274,7 @@ function aggiorna(cat, eid) {
 				htmlDiv.appendChild(trComP);
 			});
 		}
-	}
+	});
 
 	if (!cerca.z || cerca.z != 1) {
 		htmlDiv = creaEl('div','el_data',creaEl('div','punto'),creaEl('p','d','Esistente'));
