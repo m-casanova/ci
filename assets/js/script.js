@@ -137,6 +137,7 @@ function aggiorna(cat, eid) {
 	);
 
 	let ultimaData;
+	let ultimoProvv;
 
 	const frammento = document.createDocumentFragment();
 
@@ -162,38 +163,42 @@ function aggiorna(cat, eid) {
 			ultimaData = d;
 		}
 
-		const provv = db_doc[p];
-		const provP = creaEl('p','t');
-		provP.innerHTML = '&#xE201; ';
-		if (provv.u) {
-			const pUrl = provv.u.split(/:(.+)/);
-			const aUrl = document.createElement('a');
-			aUrl.href = pUrl[0].length == 2 ? `${dizFonti[pUrl[0]].replace(/\$\$/,pUrl[1])}` : provv.u;
-			if (provv.t1) {
-				aUrl.textContent = provv.t1;
-				if (provv.n1) aUrl.textContent += ` n. ${provv.n1}`;
+		if (p != ultimoProvv) {
+			const provv = db_doc[p];
+			const provP = creaEl('p','t');
+			provP.innerHTML = '&#xE201; ';
+			if (provv.u) {
+				const pUrl = provv.u.split(/:(.+)/);
+				const aUrl = document.createElement('a');
+				aUrl.href = pUrl[0].length == 2 ? `${dizFonti[pUrl[0]].replace(/\$\$/,pUrl[1])}` : provv.u;
+				if (provv.t1) {
+					aUrl.textContent = provv.t1;
+					if (provv.n1) aUrl.textContent += ` n. ${provv.n1}`;
+				} else {
+					aUrl.textContent = provv.e1;
+				}
+				provP.innerHTML += aUrl.outerHTML;
 			} else {
-				aUrl.textContent = provv.e1;
+				if (provv.t1) {
+					provP.textContent += provv.t1;
+					if (provv.n1) provP.textContent += ` n. ${provv.n1}`;
+				} else {
+					provP.textContent += provv.e1;
+				}
 			}
-			provP.innerHTML += aUrl.outerHTML;
-		} else {
-			if (provv.t1) {
-				provP.textContent += provv.t1;
-				if (provv.n1) provP.textContent += ` n. ${provv.n1}`;
-			} else {
-				provP.textContent += provv.e1;
+			if (provv.d1) provP.innerHTML += `, ${cData(provv.d1, 0)}`;
+			if (provv.e2) {
+				provP.innerHTML += ` (${provv.e2}`;
+				if (provv.d2) provP.innerHTML += `, ${cData(provv.d2, 0)}`;
+				provP.innerHTML += `)`;
 			}
-		}
-		if (provv.d1) provP.innerHTML += `, ${cData(provv.d1, 0)}`;
-		if (provv.e2) {
-			provP.innerHTML += ` (${provv.e2}`;
-			if (provv.d2) provP.innerHTML += `, ${cData(provv.d2, 0)}`;
-			provP.innerHTML += `)`;
-		}
-		htmlDiv.appendChild(provP);
+			htmlDiv.appendChild(provP);
 
-		const infoP = creaEl('p','i',provv.ev);
-		htmlDiv.appendChild(infoP);
+			const infoP = creaEl('p','i',provv.ev);
+			htmlDiv.appendChild(infoP);
+
+			ultimoProvv = p;
+		}
 
 		for (const in2 in a) {
 			a[in2].forEach(({ i1, i2, t1, t2 }) => {
