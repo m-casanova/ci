@@ -130,7 +130,11 @@ function aggiorna(cat, eid) {
 	}
 
 	const variaz = Object.entries(variaz1);
-	variaz.sort((a, b) => vData(a[1].d) - vData(b[1].d) || a[1].p - b[1].p );
+	variaz.sort((a, b) => {
+		if (a[1].d != b[1].d) return vData(a[1].d) - vData(b[1].d);
+		if (db_doc[a[1].p].d1 && db_doc[b[1].p].d1) return db_doc[a[1].p].d1 - db_doc[b[1].p].d1;
+		return false;
+	});
 
 	let ultimaData;
 	let ultimoProvv;
