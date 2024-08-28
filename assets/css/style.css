@@ -12,6 +12,7 @@ input { font-family:'test', sans-serif; font-size:16pt; margin:0; padding:0; bac
 input:focus { outline: none }
 
 a { color: var(--c3) }
+em, i { font-variation-settings: "ital" 1; font-style:normal }
 
 header { width: 100%; margin:0; padding:0 }
 header a { color: var(--b0) }
