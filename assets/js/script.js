@@ -117,7 +117,7 @@ function aggiorna(cat, eid) {
 	if (currentParams.id !== eid || currentParams.t !== cat.toString()) {
 		window.history.pushState({ id: eid, t: cat }, "", `?id=${eid}&t=${cat}`);
 	}
-	document.title = `ComunItaliani | ${cerca.n}`;
+	document.title = `ComunItalia | ${cerca.n}`;
 
 	const variaz1 = {};
 	for (const in1 of cerca.v) {
