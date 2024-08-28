@@ -15,6 +15,7 @@ const dizFonti = {
 	"lo":"http://www.consultazioniburl.servizirl.it/pdf/$$",
 	"lb":"https://www.consultazioniburl.servizirl.it/ConsultazioneBurl/ApriAllegato?apriAllegato=&idBurl=$$",
 	"pi":"http://arianna.cr.piemonte.it/iterlegcoordweb/dettaglioLegge.do?urnLegge=urn:nir:regione.piemonte:legge:$$",
+	"pu":"https://bussolanormativa.consiglio.puglia.it/public/Leges/LeggeNavscroll.aspx?id=$$",
 	"sa":"https://leggiregionali.regione.sardegna.it/legge-regionale?$$",
 	"si":"https://w3.ars.sicilia.it/lex/$$",
 	"ta":"https://bollettino.regione.taa.it/pdf/$$",
