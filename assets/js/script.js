@@ -141,7 +141,7 @@ function aggiorna(cat, eid) {
 	const variaz = Object.entries(variaz1);
 	variaz.sort((a, b) => {
 		if (a[1].d != b[1].d) return vData(a[1].d) - vData(b[1].d);
-		if (db_doc[a[1].p].d1 && db_doc[b[1].p].d1) return db_doc[a[1].p].d1 - db_doc[b[1].p].d1;
+		if (db_doc[a[1].p].d1 && db_doc[b[1].p].d1) return vData(db_doc[a[1].p].d1) - vData(db_doc[b[1].p].d1);
 		return false;
 	});
 
