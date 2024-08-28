@@ -14,7 +14,7 @@ const dizFonti = {
 	"gu":"https://www.gazzettaufficiale.it/eli/$$",
 	"lo":"http://www.consultazioniburl.servizirl.it/pdf/$$",
 	"lb":"https://www.consultazioniburl.servizirl.it/ConsultazioneBurl/ApriAllegato?apriAllegato=&idBurl=$$",
-	"pi":"http://serviziweb.csi.it/solverweb/IndexDocumentServlet?id=$$",
+	"pi":"http://arianna.cr.piemonte.it/iterlegcoordweb/dettaglioLegge.do?urnLegge=urn:nir:regione.piemonte:legge:$$",
 	"sa":"https://leggiregionali.regione.sardegna.it/legge-regionale?$$",
 	"si":"https://w3.ars.sicilia.it/lex/$$",
 	"ta":"https://bollettino.regione.taa.it/pdf/$$",
