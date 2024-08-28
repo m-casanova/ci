@@ -9,6 +9,7 @@ function loadJSON(url) {
 }
 
 const dizFonti = {
+	"ba":"http://atticonsiglio.consiglio.basilicata.it/AD_Elenco_Leggi?Codice=$$",
 	"fv":"https://lexview-int.regione.fvg.it/FontiNormative/xml/XmlLex.aspx?$$",
 	"gu":"https://www.gazzettaufficiale.it/eli/$$",
 	"lo":"http://www.consultazioniburl.servizirl.it/pdf/$$",
