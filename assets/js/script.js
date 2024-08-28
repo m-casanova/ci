@@ -12,7 +12,7 @@ const dizFonti = {
 	"ba":"http://atticonsiglio.consiglio.basilicata.it/AD_Elenco_Leggi?Codice=$$",
 	"ca":"https://www.consiglioregionale.calabria.it/bdf/api/BDF?$$",
 	"er":"https://demetra.regione.emilia-romagna.it/al/articolo?urn=er:assemblealegislativa:legge:$$",
-	"fv":"https://lexview-int.regione.fvg.it/FontiNormative/xml/XmlLex.aspx?$$",
+	"fv":"https://lexview-int.regione.fvg.it/FontiNormative/xml/XmlLex.aspx?fx=lex&ci=0&lang=multi&idx=ctrl1&$$",
 	"gu":"https://www.gazzettaufficiale.it/eli/$$",
 	"la":"https://www.consiglio.regione.lazio.it/consiglio-regionale/?vw=leggiregionalidettaglio&sv=storico&id=$$",
 	"lo":"http://www.consultazioniburl.servizirl.it/pdf/$$",
