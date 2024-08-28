@@ -22,7 +22,8 @@ const dizFonti = {
 	"si":"https://w3.ars.sicilia.it/lex/$$",
 	"ta":"https://bollettino.regione.taa.it/pdf/$$",
 	"to":"https://raccoltanormativa.consiglio.regione.toscana.it/articolo?urndoc=urn:nir:regione.toscana:legge:$$",
-	"va":"https://www.consiglio.vda.it/app/leggieregolamenti/dettaglio?versione=S&pk_lr=$$"
+	"va":"https://www.consiglio.vda.it/app/leggieregolamenti/dettaglio?versione=S&pk_lr=$$",
+	"ve":"https://www.consiglioveneto.it/web/crv/dettaglio-legge?catStruttura=LR&tab=storico&$$"
 }
 const dizVar = {
 	"AN": "Annessione da stato estero",
