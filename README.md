@@ -1,4 +1,4 @@
-# ComunItalia
+# ComunItaliani
 
 [Creazione di una pagina](https://comunitalia.github.io/) per la visualizzazione di dati estratti dal [sito SITUAS di ISTAT](https://situas.istat.it/).
 
