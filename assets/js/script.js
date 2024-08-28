@@ -9,6 +9,7 @@ function loadJSON(url) {
 }
 
 const dizFonti = {
+	"fv":"https://lexview-int.regione.fvg.it/FontiNormative/xml/XmlLex.aspx?$$",
 	"gu":"https://www.gazzettaufficiale.it/eli/$$",
 	"lo":"http://www.consultazioniburl.servizirl.it/pdf/$$",
 	"lb":"https://www.consultazioniburl.servizirl.it/ConsultazioneBurl/ApriAllegato?apriAllegato=&idBurl=$$",
