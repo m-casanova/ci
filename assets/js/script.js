@@ -10,6 +10,7 @@ function loadJSON(url) {
 
 const dizFonti = {
 	"ba":"http://atticonsiglio.consiglio.basilicata.it/AD_Elenco_Leggi?Codice=$$",
+	"er":"https://demetra.regione.emilia-romagna.it/al/articolo?urn=er:assemblealegislativa:legge:$$",
 	"fv":"https://lexview-int.regione.fvg.it/FontiNormative/xml/XmlLex.aspx?$$",
 	"gu":"https://www.gazzettaufficiale.it/eli/$$",
 	"lo":"http://www.consultazioniburl.servizirl.it/pdf/$$",
