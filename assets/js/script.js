@@ -10,6 +10,7 @@ function loadJSON(url) {
 
 const dizFonti = {
 	"ba":"http://atticonsiglio.consiglio.basilicata.it/AD_Elenco_Leggi?Codice=$$",
+	"ca":"https://www.consiglioregionale.calabria.it/bdf/api/BDF?$$",
 	"er":"https://demetra.regione.emilia-romagna.it/al/articolo?urn=er:assemblealegislativa:legge:$$",
 	"fv":"https://lexview-int.regione.fvg.it/FontiNormative/xml/XmlLex.aspx?$$",
 	"gu":"https://www.gazzettaufficiale.it/eli/$$",
@@ -20,7 +21,8 @@ const dizFonti = {
 	"sa":"https://leggiregionali.regione.sardegna.it/legge-regionale?$$",
 	"si":"https://w3.ars.sicilia.it/lex/$$",
 	"ta":"https://bollettino.regione.taa.it/pdf/$$",
-	"to":"https://raccoltanormativa.consiglio.regione.toscana.it/articolo?urndoc=urn:nir:regione.toscana:legge:$$"
+	"to":"https://raccoltanormativa.consiglio.regione.toscana.it/articolo?urndoc=urn:nir:regione.toscana:legge:$$",
+	"va":"https://www.consiglio.vda.it/app/leggieregolamenti/dettaglio?versione=S&pk_lr=$$"
 }
 const dizVar = {
 	"AN": "Annessione da stato estero",
