@@ -1,4 +1,4 @@
-@font-face { font-family:'test'; font-weight: 200 700; src:url("/Pass-A38/font/Pass_A38.woff2") format("woff2-variations"); }
+@font-face { font-family:'test'; font-weight: 200 700; src:url("https://m-casanova.github.io/Pass-A38/font/Pass_A38.woff2") format("woff2-variations"); }
 :root {
  --b0:#fff; --b1:#332925; --b2:#006644; --b3:#b36b00; --b4:#b32d43;
  --c0:#003366; --c1:#004080; --c2:#004d99; --c3:#0066cc; --c4:#207ad5; --c5:#4392E0; --c6:#6aaaeb; --c7:#94c4f5; --c8:#bfdfff; --c9:#f2f7fc;
