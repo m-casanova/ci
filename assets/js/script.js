@@ -14,6 +14,7 @@ const dizFonti = {
 	"er":"https://demetra.regione.emilia-romagna.it/al/articolo?urn=er:assemblealegislativa:legge:$$",
 	"fv":"https://lexview-int.regione.fvg.it/FontiNormative/xml/XmlLex.aspx?$$",
 	"gu":"https://www.gazzettaufficiale.it/eli/$$",
+	"la":"https://www.consiglio.regione.lazio.it/consiglio-regionale/?vw=leggiregionalidettaglio&sv=storico&id=$$",
 	"lo":"http://www.consultazioniburl.servizirl.it/pdf/$$",
 	"lb":"https://www.consultazioniburl.servizirl.it/ConsultazioneBurl/ApriAllegato?apriAllegato=&idBurl=$$",
 	"pi":"http://arianna.cr.piemonte.it/iterlegcoordweb/dettaglioLegge.do?urnLegge=urn:nir:regione.piemonte:legge:$$",
