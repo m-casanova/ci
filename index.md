@@ -5,13 +5,13 @@ use_js: true
 ---
 
 <div class="tabs">
-	<div class="tab active" data-tab="info">Info</div>
+	<div class="tab active" data-tab="t0">Info</div>
 	<div class="tab" data-tab="t1">Comuni</div>
 	<div class="tab" data-tab="t2">Province</div>
 	<div class="tab" data-tab="t3">Regioni</div>
 </div>
 <div class="tab-content">
-	<div id="info" class="active">
+	<div id="t0" class="active">
 		<h2>Evoluzione del territorio italiano</h2>
 		<p>Sono qui raccolti i dati relativi all'evoluzione del territorio italiano dal 1861.</p>
 		<p>I dati sono stati estratti da <a href="https://situas.istat.it/">SITUAS</a> (sito ISTAT), <a href="https://www.istat.it/note-legali/">rilasciati con licenza Creative Commons Attribuzione 4.0 Internazionale</a>. I dati possono essere stati modificati e integrati con altre fonti, pertanto i dati presentati possono non corrispondere a quelli forniti da ISTAT.</p>
