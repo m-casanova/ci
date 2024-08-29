@@ -9,12 +9,13 @@ function loadJSON(url) {
 }
 
 const dizFonti = {
-	"ba":"http://atticonsiglio.consiglio.basilicata.it/AD_Elenco_Leggi?Codice=$$",
+	"ba":"https://atticonsiglio.consiglio.basilicata.it/AD_Elenco_Leggi?Codice=$$",
 	"ca":"https://www.consiglioregionale.calabria.it/bdf/api/BDF?$$",
 	"er":"https://demetra.regione.emilia-romagna.it/al/articolo?urn=er:assemblealegislativa:legge:$$",
 	"fv":"https://lexview-int.regione.fvg.it/FontiNormative/xml/XmlLex.aspx?fx=lex&ci=0&lang=multi&idx=ctrl1&$$",
 	"gu":"https://www.gazzettaufficiale.it/eli/$$",
-	"la":"https://www.consiglio.regione.lazio.it/consiglio-regionale/?vw=leggiregionalidettaglio&sv=storico&id=$$",
+	"la":"https://www.consiglio.regione.lazio.it/consiglio-regionale/?vw=leggiregionalidettaglio&$$",
+	"li":"https://lrv.regione.liguria.it/liguriass_prod/articolo?urndoc=urn:nir:regione.liguria:legge:$$",
 	"lo":"http://www.consultazioniburl.servizirl.it/pdf/$$",
 	"lb":"https://www.consultazioniburl.servizirl.it/ConsultazioneBurl/ApriAllegato?apriAllegato=&idBurl=$$",
 	"pi":"http://arianna.cr.piemonte.it/iterlegcoordweb/dettaglioLegge.do?urnLegge=urn:nir:regione.piemonte:legge:$$",
