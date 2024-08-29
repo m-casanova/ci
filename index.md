@@ -19,19 +19,19 @@ use_js: true
 	</div>
 	<div id="t1">
 		<h2>Cerca un comune</h2>
-		<p><input type="text" id="cerca1" placeholder="&#xE140; Cerca..."></p>
+		<p><input type="text" id="cerca1" placeholder="&#xE140; Cerca..." autocomplete="off"></p>
 		<div class="sugg" id="sugg1"></div>
 		<div class="risp" id="risp1"></div>
 	</div>
 	<div id="t2">
 		<h2>Cerca una provincia</h2>
-		<p><input type="text" id="cerca2" placeholder="&#xE140; Cerca..."></p>
+		<p><input type="text" id="cerca2" placeholder="&#xE140; Cerca..." autocomplete="off"></p>
 		<div class="sugg" id="sugg2"></div>
 		<div class="risp" id="risp2"></div>
 	</div>
 	<div id="t3">
 		<h2>Cerca una regione</h2>
-		<p><input type="text" id="cerca3" placeholder="&#xE140; Cerca..."></p>
+		<p><input type="text" id="cerca3" placeholder="&#xE140; Cerca..." autocomplete="off"></p>
 		<div class="sugg" id="sugg3"></div>
 		<div class="risp" id="risp3"></div>
 	</div>
