@@ -18,6 +18,7 @@ const dizFonti = {
 	"li":"https://lrv.regione.liguria.it/liguriass_prod/articolo?urndoc=urn:nir:regione.liguria:legge:$$",
 	"lo":"http://www.consultazioniburl.servizirl.it/pdf/$$",
 	"lb":"https://www.consultazioniburl.servizirl.it/ConsultazioneBurl/ApriAllegato?apriAllegato=&idBurl=$$",
+	"ma":"https://www.consiglio.marche.it/banche_dati_e_documentazione/leggi/dettaglio.php?arc=sto&idl=$$",
 	"pi":"http://arianna.cr.piemonte.it/iterlegcoordweb/dettaglioLegge.do?urnLegge=urn:nir:regione.piemonte:legge:$$",
 	"pu":"https://bussolanormativa.consiglio.puglia.it/public/Leges/LeggeNavscroll.aspx?id=$$",
 	"sa":"https://leggiregionali.regione.sardegna.it/legge-regionale?$$",
