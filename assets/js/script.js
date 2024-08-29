@@ -139,14 +139,13 @@ function aggiorna(cat, eid) {
 	}
 
 	const variaz = Object.entries(variaz1);
-	variaz.sort((a, b) => {
-		if (a[1].d != b[1].d) return vData(a[1].d) - vData(b[1].d);
-		if (db_doc[a[1].p].d1 && db_doc[b[1].p].d1) return vData(db_doc[a[1].p].d1) - vData(db_doc[b[1].p].d1);
-		return false;
+	variaz.sort((a, b) => vData(a[1].d) - vData(b[1].d));
+	
+	variaz.forEach(qq => {
+		qq[1].p.sort((a, b) => vData(db_doc[a].d1) - vData(db_doc[b].d1) );
 	});
 
 	let ultimaData;
-	let ultimoProvv;
 
 	const frammento = document.createDocumentFragment();
 
@@ -172,8 +171,8 @@ function aggiorna(cat, eid) {
 			ultimaData = d;
 		}
 
-		if (p != ultimoProvv) {
-			const provv = db_doc[p];
+		p.forEach(xp => {
+			const provv = db_doc[xp];
 			const provP = creaEl('p','t');
 			provP.innerHTML = '&#xE201; ';
 			if (provv.u) {
@@ -206,8 +205,7 @@ function aggiorna(cat, eid) {
 			const infoP = creaEl('p','i',provv.ev);
 			htmlDiv.appendChild(infoP);
 
-			ultimoProvv = p;
-		}
+		});
 
 		for (const in2 in a) {
 			a[in2].forEach(({ i1, i2, t1, t2 }) => {
