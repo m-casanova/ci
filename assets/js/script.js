@@ -99,6 +99,9 @@ Promise.all(fileCaricati)
 				document.querySelectorAll('.tab-content > div').forEach(content => content.classList.remove('active'));
 				this.classList.add('active');
 				document.getElementById(this.dataset.tab).classList.add('active');
+				document.title = 'ComunItaliani';
+				let qq = this.getAttribute('data-tab').substring(2,1);
+				window.history.pushState({ t: qq }, "", `?t=${qq}`);
 			});
 		});
 	})
