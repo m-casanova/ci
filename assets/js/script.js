@@ -22,6 +22,7 @@ const dizFonti = {
 	"ma":"https://www.consiglio.marche.it/banche_dati_e_documentazione/leggi/dettaglio.php?arc=sto&idl=$$",
 	"pi":"http://arianna.cr.piemonte.it/iterlegcoordweb/dettaglioLegge.do?urnLegge=urn:nir:regione.piemonte:legge:$$",
 	"pu":"https://bussolanormativa.consiglio.puglia.it/public/Leges/LeggeNavscroll.aspx?id=$$",
+	"pg":"https://burp.regione.puglia.it/documents/20135/$$",
 	"sa":"https://leggiregionali.regione.sardegna.it/legge-regionale?$$",
 	"si":"https://w3.ars.sicilia.it/lex/$$",
 	"ta":"https://bollettino.regione.taa.it/pdf/$$",
