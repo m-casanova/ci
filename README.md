@@ -1,6 +1,6 @@
 # ComunItaliani
 
-[Creazione di una pagina](https://comunitaliani.github.io/) per la visualizzazione di dati estratti dal [sito SITUAS di ISTAT](https://situas.istat.it/).
+[Creazione di una pagina](https://m-casanova.github.io/ci/) per la visualizzazione di dati estratti dal [sito SITUAS di ISTAT](https://situas.istat.it/).
 
 I dati della sezione _Storia unità territoriali_ sono stati utilizzati per creare i file JSON utilizzati (cartella `assets/json`).
 
