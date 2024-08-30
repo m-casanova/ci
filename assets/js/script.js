@@ -34,23 +34,23 @@ const dizFonti = {
 	"ve":"https://www.consiglioveneto.it/web/crv/dettaglio-legge?catStruttura=LR&tab=storico&$$"
 }
 const dizVar = {
-	"AN": "Annessione da stato estero",
-	"AP": "Cambio di appartenenza Provincia",
-	"AQ": "Acquisizione di territorio",
-	"AQES": "Acquisizione di territorio per estinzione",
-	"AS": "Cessione a stato estero",
-	"CD": "Cambio di denominazione",
-	"CDAP": "Cambio di denominazione e appartenenza Provincia",
-	"CE": "Cessione parziale di territorio",
-	"CECS": "Cessione di territorio per costituzione di una nuova unità",
-	"CS": "Costituzione",
-	"CSCT": "Costituzione per cambio di tipologia",
-	"CT": "Cambio di tipologia di statuto",
-	"ES": "Estinzione",
-	"ESCT": "Estinzione per cambio di tipologia",
-	"PV": "Esistente al momento della costituzione del Regno d'Italia",
-	"RN": "Rinumerazione del codice statistico",
-	"VACST": "Cambio di tipologia di statuto"
+	"AN": "<span class=\"a\"></span> Annessione da stato estero",
+	"AP": "<span class=\"z\"></span> Cambio di appartenenza Provincia",
+	"AQ": "<span class=\"b\"></span> Acquisizione di territorio",
+	"AQES": "<span class=\"b\"></span> Acquisizione di territorio per estinzione",
+	"AS": "<span class=\"d\"></span> Cessione a stato estero",
+	"CD": "<span class=\"z\"></span> Cambio di denominazione",
+	"CDAP": "<span class=\"z\"></span> Cambio di denominazione e appartenenza Provincia",
+	"CE": "<span class=\"c\"></span> Cessione parziale di territorio",
+	"CECS": "<span class=\"c\"></span> Cessione di territorio per costituzione di una nuova unità",
+	"CS": "<span class=\"a\"></span> Costituzione",
+	"CSCT": "<span class=\"z\"></span> Costituzione per cambio di tipologia",
+	"CT": "<span class=\"z\"></span> Cambio di tipologia di statuto",
+	"ES": "<span class=\"d\"></span> Estinzione",
+	"ESCT": "<span class=\"z\"></span> Estinzione per cambio di tipologia",
+	"PV": "<span class=\"a\"></span> Esistente al momento della costituzione del Regno d'Italia",
+	"RN": "<span class=\"z\"></span> Rinumerazione del codice statistico",
+	"VACST": "<span class=\"z\"></span> Cambio di tipologia di statuto"
 }
 const dizTipo = {"11":"Provincia","12":"Provincia autonoma","13":"Città metropolitana","14":"Libero consorzio di comuni","15":"Unità non amministrativa","21":"Compartimento","22":"Regione"}
 
