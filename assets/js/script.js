@@ -9,13 +9,29 @@ function loadJSON(url) {
 }
 
 const dizFonti = {
+	"ba":"https://atticonsiglio.consiglio.basilicata.it/AD_Elenco_Leggi?Codice=$$",
+	"ca":"https://www.consiglioregionale.calabria.it/bdf/api/BDF?$$",
+	"cm":"https://www.regione.campania.it/normativa/item.php?pgCode=$$",
+	"er":"https://demetra.regione.emilia-romagna.it/al/articolo?urn=er:assemblealegislativa:legge:$$",
+	"fv":"https://lexview-int.regione.fvg.it/FontiNormative/xml/XmlLex.aspx?fx=lex&ci=0&lang=multi&idx=ctrl1&$$",
+	"f2":"https://bur.regione.fvg.it/arpebur/downloadPDF?doc=0&name=reposit/BUR/$$",
+	"f3":"https://bur.regione.fvg.it/newbur/downloadPDF?doc=0&name=$$",
 	"gu":"https://www.gazzettaufficiale.it/eli/$$",
+	"la":"https://www.consiglio.regione.lazio.it/consiglio-regionale/?vw=leggiregionalidettaglio&$$",
+	"li":"https://lrv.regione.liguria.it/liguriass_prod/articolo?urndoc=urn:nir:regione.liguria:legge:$$",
 	"lo":"http://www.consultazioniburl.servizirl.it/pdf/$$",
 	"lb":"https://www.consultazioniburl.servizirl.it/ConsultazioneBurl/ApriAllegato?apriAllegato=&idBurl=$$",
-	"pi":"http://serviziweb.csi.it/solverweb/IndexDocumentServlet?id=$$",
+	"ma":"https://www.consiglio.marche.it/banche_dati_e_documentazione/leggi/dettaglio.php?arc=sto&idl=$$",
+	"pi":"http://arianna.cr.piemonte.it/iterlegcoordweb/dettaglioLegge.do?urnLegge=urn:nir:regione.piemonte:legge:$$",
+	"p1":"https://www.regione.piemonte.it/governo/bollettino/abbonati/$$",
+	"pu":"https://bussolanormativa.consiglio.puglia.it/public/Leges/LeggeNavscroll.aspx?id=$$",
+	"pg":"https://burp.regione.puglia.it/documents/20135/$$",
 	"sa":"https://leggiregionali.regione.sardegna.it/legge-regionale?$$",
 	"si":"https://w3.ars.sicilia.it/lex/$$",
-	"ta":"https://bollettino.regione.taa.it/pdf/$$"	
+	"ta":"https://bollettino.regione.taa.it/pdf/$$",
+	"to":"https://raccoltanormativa.consiglio.regione.toscana.it/articolo?urndoc=urn:nir:regione.toscana:legge:$$",
+	"va":"https://www.consiglio.vda.it/app/leggieregolamenti/dettaglio?versione=S&pk_lr=$$",
+	"ve":"https://www.consiglioveneto.it/web/crv/dettaglio-legge?catStruttura=LR&tab=storico&$$"
 }
 const dizVar = {
 	"AN": "Annessione da stato estero",
@@ -90,6 +106,9 @@ Promise.all(fileCaricati)
 				document.querySelectorAll('.tab-content > div').forEach(content => content.classList.remove('active'));
 				this.classList.add('active');
 				document.getElementById(this.dataset.tab).classList.add('active');
+				document.title = 'ComunItaliani';
+				let qq = this.getAttribute('data-tab').substring(2,1);
+				window.history.pushState({ t: qq }, "", `?t=${qq}`);
 			});
 		});
 	})
@@ -130,14 +149,13 @@ function aggiorna(cat, eid) {
 	}
 
 	const variaz = Object.entries(variaz1);
-	variaz.sort((a, b) => {
-		if (a[1].d != b[1].d) return vData(a[1].d) - vData(b[1].d);
-		if (db_doc[a[1].p].d1 && db_doc[b[1].p].d1) return db_doc[a[1].p].d1 - db_doc[b[1].p].d1;
-		return false;
+	variaz.sort((a, b) => vData(a[1].d) - vData(b[1].d));
+	
+	variaz.forEach(qq => {
+		qq[1].p.sort((a, b) => vData(db_doc[a].d1) - vData(db_doc[b].d1) );
 	});
 
 	let ultimaData;
-	let ultimoProvv;
 
 	const frammento = document.createDocumentFragment();
 
@@ -163,8 +181,8 @@ function aggiorna(cat, eid) {
 			ultimaData = d;
 		}
 
-		if (p != ultimoProvv) {
-			const provv = db_doc[p];
+		p.forEach(xp => {
+			const provv = db_doc[xp];
 			const provP = creaEl('p','t');
 			provP.innerHTML = '&#xE201; ';
 			if (provv.u) {
@@ -197,8 +215,7 @@ function aggiorna(cat, eid) {
 			const infoP = creaEl('p','i',provv.ev);
 			htmlDiv.appendChild(infoP);
 
-			ultimoProvv = p;
-		}
+		});
 
 		for (const in2 in a) {
 			a[in2].forEach(({ i1, i2, t1, t2 }) => {
