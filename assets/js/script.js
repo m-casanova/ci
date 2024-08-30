@@ -9,6 +9,8 @@ function loadJSON(url) {
 }
 
 const dizFonti = {
+	"gu":"https://www.gazzettaufficiale.it/eli/$$",
+	"gz":"https://www.gazzettaufficiale.it/do/gazzetta/downloadPdf?tipoSerie=FO&tipoSupplemento=GU&numeroSupplemento=0&progressivo=0&estensione=pdf&edizione=0&$$",
 	"ba":"https://atticonsiglio.consiglio.basilicata.it/AD_Elenco_Leggi?Codice=$$",
 	"ca":"https://www.consiglioregionale.calabria.it/bdf/api/BDF?$$",
 	"cm":"https://www.regione.campania.it/normativa/item.php?pgCode=$$",
@@ -16,7 +18,6 @@ const dizFonti = {
 	"fv":"https://lexview-int.regione.fvg.it/FontiNormative/xml/XmlLex.aspx?fx=lex&ci=0&lang=multi&idx=ctrl1&$$",
 	"f2":"https://bur.regione.fvg.it/arpebur/downloadPDF?doc=0&name=reposit/BUR/$$",
 	"f3":"https://bur.regione.fvg.it/newbur/downloadPDF?doc=0&name=$$",
-	"gu":"https://www.gazzettaufficiale.it/eli/$$",
 	"la":"https://www.consiglio.regione.lazio.it/consiglio-regionale/?vw=leggiregionalidettaglio&$$",
 	"li":"https://lrv.regione.liguria.it/liguriass_prod/articolo?urndoc=urn:nir:regione.liguria:legge:$$",
 	"lo":"http://www.consultazioniburl.servizirl.it/pdf/$$",
