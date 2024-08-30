@@ -73,9 +73,15 @@ p.info { font-weight: 450; margin: 0 10px; font-size: 18px; color: var(--n2)}
 .risp .d { font-weight: 700; margin-bottom: 5px }
 .risp .t { margin-left: 20px; font-size: 15pt }
 .risp .i { margin-left: 30px; font-size: 14pt }
-.risp .e { margin-left: 50px; font-size: 14pt }
 .risp .se { color: var(--b4); font-weight: bold }
 .risp .nc { color: var(--b3); font-weight: bold }
+
+.risp .e { margin-left: 50px; font-size: 14pt; font-weight: 400 }
+.risp .e .a::before { font-weight: 700; content: ''; color: var(--b2); }
+.risp .e .b::before { font-weight: 700; content: ''; color: var(--b3); }
+.risp .e .c::before { font-weight: 700; content: ''; color: var(--b3); }
+.risp .e .d::before { font-weight: 700; content: ''; color: var(--b4); }
+.risp .e .z::before { font-weight: 700; content: ''; color: var(--n4); }
 
 .spinner-container { display: none }
 .wrapper { min-height: 100%; display: grid; grid-template-rows: auto 1fr auto; }
