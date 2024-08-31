@@ -164,7 +164,11 @@ function aggiorna(cat, eid) {
 	frammento.appendChild(testa);
 	const testa2 = creaEl('p','info','');
 	testa2.innerHTML = cerca.z==1?'<span class="icd"></span> Non esistente':'<span class="ica"></span> Esistente';
-	if (cerca.m) testa2.innerHTML += ' - <span class="icm"></span> <a href="https://www.openstreetmap.org/relation/' + cerca.m + '">OpenStreetMap</a>';
+	if (cerca.m) {
+		testa2.innerHTML += ' - <span class="icm"></span> <a href="https://www.openstreetmap.org/relation/' + cerca.m + '">OpenStreetMap</a>';
+	} else if (cerca.m2) {
+		testa2.innerHTML += ' - <span class="icm"></span> <a href="https://www.openstreetmap.org/node/' + cerca.m2 + '">OpenStreetMap</a>';
+	}
 	frammento.appendChild(testa2);
 
 	const htmlOutput = creaEl('div',cerca.z?'elencoz':'elenco');
