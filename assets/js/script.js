@@ -35,23 +35,23 @@ const dizFonti = {
 	"ve":"https://www.consiglioveneto.it/web/crv/dettaglio-legge?catStruttura=LR&tab=storico&$$"
 }
 const dizVar = {
-	"AN": "<span class=\"a\"></span> Annessione da stato estero",
-	"AP": "<span class=\"z\"></span> Cambio di appartenenza Provincia",
-	"AQ": "<span class=\"b\"></span> Acquisizione di territorio",
-	"AQES": "<span class=\"b\"></span> Acquisizione di territorio per estinzione",
-	"AS": "<span class=\"d\"></span> Cessione a stato estero",
-	"CD": "<span class=\"z\"></span> Cambio di denominazione",
-	"CDAP": "<span class=\"z\"></span> Cambio di denominazione e appartenenza Provincia",
-	"CE": "<span class=\"c\"></span> Cessione parziale di territorio",
-	"CECS": "<span class=\"c\"></span> Cessione di territorio per costituzione di una nuova unità",
-	"CS": "<span class=\"a\"></span> Costituzione",
-	"CSCT": "<span class=\"z\"></span> Costituzione per cambio di tipologia",
-	"CT": "<span class=\"z\"></span> Cambio di tipologia di statuto",
-	"ES": "<span class=\"d\"></span> Estinzione",
-	"ESCT": "<span class=\"z\"></span> Estinzione per cambio di tipologia",
-	"PV": "<span class=\"a\"></span> Esistente al momento della costituzione del Regno d'Italia",
-	"RN": "<span class=\"z\"></span> Rinumerazione del codice statistico",
-	"VACST": "<span class=\"z\"></span> Cambio di tipologia di statuto"
+	"AN": "<span class=\"ica\"></span> Annessione da stato estero",
+	"AP": "<span class=\"icz\"></span> Cambio di appartenenza Provincia",
+	"AQ": "<span class=\"icb\"></span> Acquisizione di territorio",
+	"AQES": "<span class=\"icb\"></span> Acquisizione di territorio per estinzione",
+	"AS": "<span class=\"icd\"></span> Cessione a stato estero",
+	"CD": "<span class=\"icz\"></span> Cambio di denominazione",
+	"CDAP": "<span class=\"icz\"></span> Cambio di denominazione e appartenenza Provincia",
+	"CE": "<span class=\"icc\"></span> Cessione parziale di territorio",
+	"CECS": "<span class=\"icc\"></span> Cessione di territorio per costituzione di una nuova unità",
+	"CS": "<span class=\"ica\"></span> Costituzione",
+	"CSCT": "<span class=\"icz\"></span> Costituzione per cambio di tipologia",
+	"CT": "<span class=\"icz\"></span> Cambio di tipologia di statuto",
+	"ES": "<span class=\"icd\"></span> Estinzione",
+	"ESCT": "<span class=\"icz\"></span> Estinzione per cambio di tipologia",
+	"PV": "<span class=\"ica\"></span> Esistente al momento della costituzione del Regno d'Italia",
+	"RN": "<span class=\"icz\"></span> Rinumerazione del codice statistico",
+	"VACST": "<span class=\"icz\"></span> Cambio di tipologia di statuto"
 }
 const dizTipo = {"11":"Provincia","12":"Provincia autonoma","13":"Città metropolitana","14":"Libero consorzio di comuni","15":"Unità non amministrativa","21":"Compartimento","22":"Regione"}
 
@@ -162,7 +162,9 @@ function aggiorna(cat, eid) {
 
 	const testa = creaEl('h3',cerca.z==1?'z':null,cerca.n);
 	frammento.appendChild(testa);
-	const testa2 = creaEl('p','info',cerca.z==1?'Non esistente':'Esistente');
+	const testa2 = creaEl('p','info','');
+	testa2.innerHTML = cerca.z==1?'<span class="icd"></span> Non esistente':'<span class="ica"></span> Esistente';
+	if (cerca.m) testa2.innerHTML += ' - <span class="icm"></span> <a href="https://www.openstreetmap.org/relation/' + cerca.m + '">OpenStreetMap</a>';
 	frammento.appendChild(testa2);
 
 	const htmlOutput = creaEl('div',cerca.z?'elencoz':'elenco');
