@@ -77,11 +77,12 @@ p.info { font-weight: 450; margin: 0 10px; font-size: 18px; color: var(--n2)}
 .risp .nc { color: var(--b3); font-weight: bold }
 
 .risp .e { margin-left: 50px; font-size: 14pt; font-weight: 400 }
-.risp .e .a::before { font-weight: 700; content: ''; color: var(--b2); }
-.risp .e .b::before { font-weight: 700; content: ''; color: var(--b3); }
-.risp .e .c::before { font-weight: 700; content: ''; color: var(--b3); }
-.risp .e .d::before { font-weight: 700; content: ''; color: var(--b4); }
-.risp .e .z::before { font-weight: 700; content: ''; color: var(--n4); }
+span.ica::before { font-weight: 700; content: ''; color: var(--b2); }
+span.icb::before { font-weight: 700; content: ''; color: var(--b3); }
+span.icc::before { font-weight: 700; content: ''; color: var(--b3); }
+span.icd::before { font-weight: 700; content: ''; color: var(--b4); }
+span.icm::before { font-weight: 700; content: ''; color: var(--n2); }
+span.icz::before { font-weight: 700; content: ''; color: var(--n4); }
 
 .spinner-container { display: none }
 .wrapper { min-height: 100%; display: grid; grid-template-rows: auto 1fr auto; }
