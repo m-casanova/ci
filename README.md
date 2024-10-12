@@ -6,8 +6,8 @@ I dati della sezione _Storia unità territoriali_ sono stati utilizzati per crea
 
 ## Modifiche
 
-* Sono incluse anche l'informazione per i dati sui [comuni cessati e non ricostituiti](https://situas.istat.it/web/#/home/in-evidenza?id=128&dateFrom=1861-03-17)
-* I dati di numerose norme sono aggiornati con i dati dalla Gazzetta Ufficiale, con l'aggiunta di link verso la singola norma
-* I dati di varie norme sono stati aggiornati con i dati dai Bollettini Ufficiali regionali
+* Sono inclusi anche i dati sui [comuni cessati e non ricostituiti](https://situas.istat.it/web/#/home/in-evidenza?id=128&dateFrom=1861-03-17)
+* I dati di numerose norme sono aggiornati con i dati dalla _Gazzetta Ufficiale_, con l'aggiunta di link verso la singola norma
+* I dati di varie norme regionali sono stati aggiornati con i dati dai diversi Bollettini Ufficiali
 
 I dati originari sono stati [rilasciati da ISTAT](https://www.istat.it/note-legali/) con licenza CC BY 4.0 International.
