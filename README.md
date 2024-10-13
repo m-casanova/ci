@@ -8,10 +8,10 @@ I dati della sezione _Storia unità territoriali_ sono stati utilizzati per crea
 
 * Sono inclusi anche i dati sui [comuni cessati e non ricostituiti](https://situas.istat.it/web/#/home/in-evidenza?id=128&dateFrom=1861-03-17)
 * Singole norme
-** Collegamento alla _Gazzetta Ufficiale_
-** Collegamento ai diversi Bollettini Ufficiali regionali
+  * Collegamento alla _Gazzetta Ufficiale_
+  * Collegamento ai diversi Bollettini Ufficiali regionali
 * Mappa su OpenStreetMap
-** Collegamento per tutti i comuni esistenti
-** Collegamento per alcuni comuni soppressi
+  * Collegamento per tutti i comuni esistenti
+  * Collegamento per alcuni comuni soppressi
 
 I dati originari sono stati [rilasciati da ISTAT](https://www.istat.it/note-legali/) con licenza CC BY 4.0 International.
