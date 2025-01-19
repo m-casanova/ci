@@ -36,12 +36,12 @@ const dizFonti = {
 }
 const dizVar = {
 	"AN": "<span class=\"ica\"></span> Annessione da stato estero",
-	"AP": "<span class=\"icz\"></span> Cambio di appartenenza Provincia",
+	"AP": "<span class=\"icz\"></span> Cambio di appartenenza provincia o regione",
 	"AQ": "<span class=\"icb\"></span> Acquisizione di territorio",
 	"AQES": "<span class=\"icb\"></span> Acquisizione di territorio per estinzione",
 	"AS": "<span class=\"icd\"></span> Cessione a stato estero",
 	"CD": "<span class=\"icz\"></span> Cambio di denominazione",
-	"CDAP": "<span class=\"icz\"></span> Cambio di denominazione e appartenenza Provincia",
+	"CDAP": "<span class=\"icz\"></span> Cambio di denominazione e appartenenza provincia",
 	"CE": "<span class=\"icc\"></span> Cessione parziale di territorio",
 	"CECS": "<span class=\"icc\"></span> Cessione di territorio per costituzione di una nuova unità",
 	"CS": "<span class=\"ica\"></span> Costituzione",
