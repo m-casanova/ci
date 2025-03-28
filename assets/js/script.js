@@ -163,7 +163,7 @@ function aggiorna(cat, eid) {
 	const testa = creaEl('h3',cerca.z==1?'z':null,cerca.n);
 	frammento.appendChild(testa);
 	const testa2 = creaEl('p','info','');
-	testa2.innerHTML = cerca.z==1?'<span class="icd"></span> Non più presente tra i comuni italiani':'<span class="ica"></span> Presente tra i comuni italiani';
+	testa2.innerHTML = cerca.z==1?'<span class="icd"></span> Non più presente':'<span class="ica"></span> Presente';
 	if (cerca.m) {
 		testa2.innerHTML += ' - <span class="icm"></span> <a href="https://www.openstreetmap.org/relation/' + cerca.m + '">OpenStreetMap</a>';
 	} else if (cerca.m2) {
