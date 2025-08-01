@@ -14,7 +14,7 @@ use_js: true
 	<div id="t0" class="active">
 		<h2>Evoluzione del territorio italiano</h2>
 		<p>Sono qui raccolti i dati relativi all'evoluzione del territorio italiano dal 1861.</p>
-		<p><b>Ultimo aggiornamento:</b> giugno 2025,  Nuova denominazione Tripi-Abakainon assunta dal comune di Tripi nella Città metropolitana di Messina.</p>
+		<p><b>Ultimo aggiornamento:</b> agosto 2025,  distacco di territorio da Bressanone con aggregazone a Varna.</p>
 		<p>I dati sono stati estratti da <a href="https://situas.istat.it/">SITUAS</a> (sito ISTAT), <a href="https://www.istat.it/note-legali/">rilasciati con licenza Creative Commons Attribuzione 4.0 Internazionale</a>. I dati possono essere stati modificati e integrati con altre fonti, pertanto i dati presentati possono non corrispondere a quelli forniti da ISTAT.</p>
 		<p>Il carattere utilizzato per questa pagina è <a href="https://github.com/m-casanova/Pass-A38">Pass A38</a>.</p>
 	</div>
